@@ -1,5 +1,5 @@
-mod responses;
-use responses::{Root, ScanRoot};
+mod response;
+use response::{Root, ScanRoot};
 
 use crate::{
     error::VtError,

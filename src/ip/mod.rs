@@ -1,5 +1,5 @@
-mod responses;
-use responses::Root;
+mod response;
+use response::Root;
 
 use crate::{error::VtError, utils::http_get, VtClient};
 
