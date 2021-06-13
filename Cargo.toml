@@ -8,10 +8,13 @@ categories = [""]
 repository = "https://github.com/marirs/marirs/vt3-rs"
 readme = "README.md"
 license-file = "LICENSE"
-exclude = ["example"]
+exclude = ["examples", "data"]
 edition = "2018"
 
 [dependencies]
+reqwest = { version = "0.11.3",  features = ["blocking", "multipart"]  }
+serde = { version = "1.0.126", features = ["derive"] }
+serde_json = "1.0.64"
 
 [lib]
 name = "vt3"
