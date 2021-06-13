@@ -37,7 +37,7 @@ impl<'a> VtClient<'a> {
         VtClient {
             api_key,
             endpoint: "https://www.virustotal.com/api/v3",
-            user_agent: "rust-client/vt3-rs",
+            user_agent: "rust-client/vt3-rs+https://github.com/marirs/vt3-rs",
         }
     }
 }
