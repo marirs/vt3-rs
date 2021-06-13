@@ -47,9 +47,9 @@ impl<'a> VtClient<'a> {
         //! let url = "https://example.com";
         //! println!("{:?}", vt.url_scan(url));
         //! ```
-        let url_id = match resource_id.split('-').skip(1).next() {
-            Some(res) => res, // removed the padding
-            None => resource_id     // assume the padding is removed by user
+        let url_id = match resource_id.split('-').nth(1) {
+            Some(res) => res,    // removed the padding
+            None => resource_id, // assume the padding is removed by user
         };
         let url = format!("{}/urls/{}/analyse", self.endpoint, url_id);
         let form_data = &[("url", resource_id)];
@@ -57,8 +57,8 @@ impl<'a> VtClient<'a> {
             Ok(res) => res,
             Err(e) => {
                 println!("{}", e);
-                return Err(e)
-            },
+                return Err(e);
+            }
         };
 
         let res: ScanRoot = match serde_json::from_str(&text) {
@@ -100,7 +100,7 @@ impl<'a> VtClient<'a> {
         Ok(res)
     }
 
-    pub fn url_info_by_id(self, resource_id: &str)-> Result<Root, VtError> {
+    pub fn url_info_by_id(self, resource_id: &str) -> Result<Root, VtError> {
         //! Get the report of a given Url by its resource id. Generally you can first
         //! submit a url for scanning, and then, get the resource_id (`data.id`)
         //! and then url_info_by_id(data.id)
@@ -115,15 +115,11 @@ impl<'a> VtClient<'a> {
         //! let resource_id = vt.url_scan(resource).unwrap();
         //! println!("{:?}", vt.url_info_by_id(&resource_id.data.id))
         //! ```
-        let url_id = match resource_id.split('-').skip(1).next() {
-            Some(res) => res, // removed the padding
-            None => resource_id     // assume the padding is removed by user
+        let url_id = match resource_id.split('-').nth(1) {
+            Some(res) => res,    // removed the padding
+            None => resource_id, // assume the padding is removed by user
         };
-        let url = format!(
-            "{}/urls/{}",
-            self.endpoint,
-            url_id
-        );
+        let url = format!("{}/urls/{}", self.endpoint, url_id);
 
         let text = match http_get(self.api_key, self.user_agent, &url) {
             Ok(res) => res,

@@ -28,7 +28,7 @@ fn main() {
     } else {
         match vt_client.url_rescan(&resource_id.data.id) {
             Ok(report) => println!("{:#?}", report),
-            Err(e) => println!("Error: {}", e.to_string())
+            Err(e) => println!("Error: {}", e.to_string()),
         }
     }
 }
