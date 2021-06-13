@@ -1,6 +1,6 @@
 [package]
 name = "vt3"
-version = "0.1.0"
+version = "0.3.2"
 authors = ["Marirs <marirs@gmail.com>"]
 description = "VirusTotal REST API v3"
 keywords = ["virustotal", "api", "v3"]
@@ -8,7 +8,7 @@ categories = [""]
 repository = "https://github.com/marirs/marirs/vt3-rs"
 readme = "README.md"
 license-file = "LICENSE"
-exclude = ["examples", "data"]
+exclude = ["examples"]
 edition = "2018"
 
 [dependencies]
