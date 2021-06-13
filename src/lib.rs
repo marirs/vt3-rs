@@ -1,3 +1,4 @@
+mod domain;
 /// VirusTotal API v3
 /// Clean & Simple interface to access the VirusTotal v3 REST api's
 /// ## Usage

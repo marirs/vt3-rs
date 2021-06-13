@@ -1,6 +1,6 @@
 [package]
 name = "vt3"
-version = "0.3.3"
+version = "0.3.4"
 authors = ["Marirs <marirs@gmail.com>"]
 description = "VirusTotal REST API v3"
 keywords = ["virustotal", "api", "v3"]

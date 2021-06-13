@@ -14,7 +14,7 @@ including those exclusive to VirusTotal Enterprise such as
 - Cargo.toml
 ```toml
 [dependencies]
-vt3 = "0.3.3"
+vt3 = "0.3.4"
 ```
 
 - and then: to get `ip information`
