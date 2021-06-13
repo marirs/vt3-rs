@@ -1,5 +1,3 @@
-pub mod error;
-mod ip;
 /// VirusTotal API v3
 /// Clean & Simple interface to access the VirusTotal v3 REST api's
 /// ## Usage
@@ -13,6 +11,9 @@ mod ip;
 /// let vt_client = vt3::VtClient::new("YOUR API KEY");
 /// ```
 ///
+pub mod error;
+mod ip;
+mod url;
 mod utils;
 
 #[derive(Copy, Clone)]

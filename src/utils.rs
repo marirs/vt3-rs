@@ -32,8 +32,8 @@ pub(crate) fn http_post(
         .header("x-apikey", api_key)
         .header("Accept", "application/json")
         .form(form_data)
-        .send()
-        .unwrap();
+        .send()?;
+
     let status = resp.status();
     let text = resp.text().unwrap();
 
