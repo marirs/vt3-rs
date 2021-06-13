@@ -1,0 +1,31 @@
+[package]
+name = "vt3"
+version = "0.1.0"
+authors = ["Marirs <marirs@gmail.com>"]
+description = "VirusTotal REST API v3"
+keywords = ["virustotal", "api", "v3"]
+categories = [""]
+repository = "https://github.com/marirs/marirs/vt3-rs"
+readme = "README.md"
+license-file = "LICENSE"
+exclude = ["example"]
+edition = "2018"
+
+[dependencies]
+
+[lib]
+name = "vt3"
+path = "src/lib.rs"
+
+[badges]
+travis-ci = { repository = "marirs/vt3-rs" }
+
+[profile.dev]
+opt-level = 3
+
+[profile.release]
+codegen-units = 1
+debug-assertions = false
+debug = false
+opt-level = 3
+lto = true
