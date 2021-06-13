@@ -43,6 +43,13 @@ fn main() {
 }
 ```
 
+## Examples
+To run the examples:
+- `cargo run --example domain_info <your_api_key>`
+- `cargo run --example ip_info <your_api_key>`
+- `cargo run --example url_info <your_api_key>`
+- `cargo run --example url_info_by_id <your_api_key>`
+- `cargo run --example url_rescan <your_api_key>`
 
 ---
 License: MIT
