@@ -1,4 +1,8 @@
 # VirusTotal Api v3
+![Crates.io](https://img.shields.io/crates/v/vt3)
+![docs.rs](https://img.shields.io/docsrs/vt3/latest)
+[![Build Status](https://travis-ci.com/marirs/vt3-rs.svg?branch=main)](https://travis-ci.com/marirs/vt3-rs)
+[![GitHub license](https://img.shields.io/github/license/marirs/vt3-rs)](https://github.com/marirs/vt3-rs/blob/main/LICENSE)
 
 VT3 provides an easy api interface to use VirusTotal v3 REST endpoints, 
 including those exclusive to VirusTotal Enterprise such as 
@@ -10,7 +14,7 @@ including those exclusive to VirusTotal Enterprise such as
 - Cargo.toml
 ```toml
 [dependencies]
-vt3 = "0.3.2"
+vt3 = "0.3.3"
 ```
 
 - and then: to get `ip information`
@@ -40,6 +44,6 @@ fn main() {
 ```
 
 
---
+---
 License: MIT
 
