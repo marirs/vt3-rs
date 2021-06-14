@@ -136,6 +136,31 @@ pub(crate) fn http_delete(api_key: &str, user_agent: &str, url: &str) -> Result<
     }
 }
 
+/// PATCH
+#[cfg(feature = "enterprise")]
+pub(crate) fn http_patch(
+    api_key: &str,
+    user_agent: &str,
+    url: &str,
+    data: String,
+) -> Result<String, VtError> {
+    let client = Client::builder().user_agent(user_agent).build().unwrap();
+    let resp = client
+        .patch(url)
+        .header("x-apikey", api_key)
+        .header("Accept", "application/json")
+        .body(data)
+        .send()
+        .unwrap();
+    let status = resp.status();
+    let text = resp.text().unwrap();
+
+    match status {
+        StatusCode::OK => Ok(text), // 200
+        _ => Err(error_from_status(status, &text)),
+    }
+}
+
 /// Return the VtError based on the http status code
 fn error_from_status(status_code: StatusCode, resp_text: &str) -> VtError {
     match status_code {
