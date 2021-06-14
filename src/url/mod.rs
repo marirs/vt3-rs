@@ -12,7 +12,6 @@ impl<'a> VtClient<'a> {
         //! Scan an URL
         //!
         //! ## Example Usage
-        //!
         //! ```rust
         //! use vt3::VtClient;
         //!

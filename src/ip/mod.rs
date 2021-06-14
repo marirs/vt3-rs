@@ -8,7 +8,6 @@ impl<'a> VtClient<'a> {
         //! Get the report of a given IP Address
         //!
         //! ## Example Usage
-        //!
         //! ```rust
         //! use vt3::VtClient;
         //!
