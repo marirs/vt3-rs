@@ -87,6 +87,7 @@ pub struct LastAnalysisResults {
     #[serde(rename = "engine_version")]
     pub engine_version: Option<String>,
     pub method: Option<String>,
+    // TODO: remove serde_json dependency
     pub result: Option<serde_json::Value>,
 }
 

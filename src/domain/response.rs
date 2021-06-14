@@ -165,6 +165,7 @@ pub struct Extensions {
     pub authority_key_identifier: Option<AuthorityKeyIdentifier>,
     #[serde(rename = "subject_alternative_name")]
     pub subject_alternative_name: Option<Vec<String>>,
+    // TODO: remove serde_json dependency
     pub tags: Option<Vec<::serde_json::Value>>,
     #[serde(rename = "subject_key_identifier")]
     pub subject_key_identifier: Option<String>,
