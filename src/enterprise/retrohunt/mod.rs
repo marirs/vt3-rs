@@ -37,20 +37,14 @@ impl<'a> VtClient<'a> {
             query_params.push(("cursor", c))
         }
 
-        let text = match http_get_with_params(
+        let text = http_get_with_params(
             self.api_key,
             self.user_agent,
             &url,
             &query_params.as_slice(),
-        ) {
-            Ok(res) => res,
-            Err(e) => return Err(e),
-        };
+        )?;
 
-        let res: SearchJobRoot = match serde_json::from_str(&text) {
-            Ok(r) => r,
-            Err(e) => return Err(VtError::Json(e)),
-        };
+        let res = serde_json::from_str(&text)?;
 
         Ok(res)
     }
@@ -67,15 +61,9 @@ impl<'a> VtClient<'a> {
         //! ```
         let url = format!("{}/intelligence/retrohunt_jobs/{}", self.endpoint, job_id);
 
-        let text = match http_get(self.api_key, self.user_agent, &url) {
-            Ok(res) => res,
-            Err(e) => return Err(e),
-        };
+        let text = http_get(self.api_key, self.user_agent, &url)?;
 
-        let res: SearchJobRoot = match serde_json::from_str(&text) {
-            Ok(r) => r,
-            Err(e) => return Err(VtError::Json(e)),
-        };
+        let res = serde_json::from_str(&text)?;
 
         Ok(res)
     }
@@ -93,15 +81,9 @@ impl<'a> VtClient<'a> {
         //! ```
         let url = format!("{}/intelligence/retrohunt_jobs", self.endpoint);
         let js = serde_json::to_string(data).unwrap();
-        let text = match http_body_post(self.api_key, self.user_agent, &url, js) {
-            Ok(res) => res,
-            Err(e) => return Err(e),
-        };
+        let text = http_body_post(self.api_key, self.user_agent, &url, js)?;
 
-        let res: SubmitJobRoot = match serde_json::from_str(&text) {
-            Ok(r) => r,
-            Err(e) => return Err(VtError::Json(e)),
-        };
+        let res = serde_json::from_str(&text)?;
 
         Ok(res)
     }
@@ -117,10 +99,7 @@ impl<'a> VtClient<'a> {
         //! vt.delete_job(1);
         //! ```
         let url = format!("{}/intelligence/retrohunt_jobs/{}", self.endpoint, job_id);
-        let text = match http_delete(self.api_key, self.user_agent, &url) {
-            Ok(res) => res,
-            Err(e) => return Err(e),
-        };
+        let text = http_delete(self.api_key, self.user_agent, &url)?;
 
         Ok(text)
     }
@@ -142,10 +121,7 @@ impl<'a> VtClient<'a> {
         );
         let form_data = &[("id", job_id.as_str())];
 
-        let text = match http_post(self.api_key, self.user_agent, &url, form_data) {
-            Ok(res) => res,
-            Err(e) => return Err(e),
-        };
+        let text = http_post(self.api_key, self.user_agent, &url, form_data)?;
 
         Ok(text)
     }

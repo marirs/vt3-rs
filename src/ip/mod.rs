@@ -15,15 +15,9 @@ impl<'a> VtClient<'a> {
         //! println!("{:?}", vt.ip_info("192.168.2.1"));
         //! ```
         let url = format!("{}/ip_addresses/{}", self.endpoint, ip_address);
-        let text = match http_get(self.api_key, self.user_agent, &url) {
-            Ok(res) => res,
-            Err(e) => return Err(e),
-        };
+        let text = http_get(self.api_key, self.user_agent, &url)?;
 
-        let res: Root = match serde_json::from_str(&text) {
-            Ok(r) => r,
-            Err(e) => return Err(VtError::Json(e)),
-        };
+        let res = serde_json::from_str(&text)?;
 
         Ok(res)
     }

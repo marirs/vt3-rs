@@ -24,15 +24,9 @@ impl<'a> VtClient<'a> {
         //! ```
         let url = format!("{}/files/{}", self.endpoint, id);
 
-        let text = match http_get(self.api_key, self.user_agent, &url) {
-            Ok(res) => res,
-            Err(e) => return Err(e),
-        };
+        let text = http_get(self.api_key, self.user_agent, &url)?;
 
-        let res: Root = match serde_json::from_str(&text) {
-            Ok(r) => r,
-            Err(e) => return Err(VtError::Json(e)),
-        };
+        let res = serde_json::from_str(&text)?;
 
         Ok(res)
     }
@@ -50,23 +44,14 @@ impl<'a> VtClient<'a> {
         let mut f = File::open(file).unwrap();
         let mut buffer = Vec::new();
         {
-            match f.read_to_end(&mut buffer) {
-                Ok(_) => {}
-                Err(e) => return Err(VtError::Io(e)),
-            };
+            f.read_to_end(&mut buffer)?;
         }
         let form_data = Form::new().part("file", Part::bytes(buffer).file_name(file));
 
         let url = format!("{}/files", self.endpoint);
-        let text = match http_multipart_post(self.api_key, self.user_agent, &url, form_data) {
-            Ok(res) => res,
-            Err(e) => return Err(e),
-        };
+        let text = http_multipart_post(self.api_key, self.user_agent, &url, form_data)?;
 
-        let res: ScanRoot = match serde_json::from_str(&text) {
-            Ok(r) => r,
-            Err(e) => return Err(VtError::Json(e)),
-        };
+        let res = serde_json::from_str(&text)?;
 
         Ok(res)
     }
@@ -85,15 +70,9 @@ impl<'a> VtClient<'a> {
         let url = format!("{}/files/{}/analyse", self.endpoint, id);
         let form_data = &[("id", id)];
 
-        let text = match http_post(self.api_key, self.user_agent, &url, form_data) {
-            Ok(res) => res,
-            Err(e) => return Err(e),
-        };
+        let text = http_post(self.api_key, self.user_agent, &url, form_data)?;
 
-        let res: ScanRoot = match serde_json::from_str(&text) {
-            Ok(r) => r,
-            Err(e) => return Err(VtError::Json(e)),
-        };
+        let res = serde_json::from_str(&text)?;
 
         Ok(res)
     }
