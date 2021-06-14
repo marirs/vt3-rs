@@ -15,7 +15,7 @@ including those exclusive to VirusTotal Enterprise such as
 - Cargo.toml
 ```toml
 [dependencies]
-vt3 = "0.3.4"
+vt3 = "0.3.5"
 ```
 
 - and then: to get `ip information`
@@ -51,7 +51,7 @@ To run the examples:
 - `cargo run --example url_info <your_api_key>`
 - `cargo run --example url_info_by_id <your_api_key>`
 - `cargo run --example url_rescan <your_api_key>`
-
+- `cargo run --example file_scan <your_api_key>`
 ---
 License: MIT
 

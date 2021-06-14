@@ -1,5 +1,5 @@
 use crate::error::VtError;
-use reqwest::{blocking::Client, StatusCode};
+use reqwest::{blocking::Client, StatusCode, blocking::multipart::Form};
 
 /// GET from a URL
 pub(crate) fn http_get(api_key: &str, user_agent: &str, url: &str) -> Result<String, VtError> {
@@ -32,6 +32,30 @@ pub(crate) fn http_post(
         .header("x-apikey", api_key)
         .header("Accept", "application/json")
         .form(form_data)
+        .send()?;
+
+    let status = resp.status();
+    let text = resp.text().unwrap();
+
+    match status {
+        StatusCode::OK => Ok(text), // 200
+        _ => Err(error_from_status(status, &text)),
+    }
+}
+
+/// POST to a URL with multipart form_data
+pub(crate) fn http_multipart_post(
+    api_key: &str,
+    user_agent: &str,
+    url: &str,
+    form_data: Form,
+) -> Result<String, VtError> {
+    let client = Client::builder().user_agent(user_agent).build().unwrap();
+    let resp = client
+        .post(url)
+        .header("x-apikey", api_key)
+        .header("Accept", "application/json")
+        .multipart(form_data)
         .send()?;
 
     let status = resp.status();

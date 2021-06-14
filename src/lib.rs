@@ -13,6 +13,7 @@ mod domain;
 /// ```
 ///
 pub mod error;
+mod file;
 mod ip;
 mod url;
 mod utils;
