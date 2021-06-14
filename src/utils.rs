@@ -1,5 +1,5 @@
 use crate::error::VtError;
-use reqwest::{blocking::Client, StatusCode, blocking::multipart::Form};
+use reqwest::{blocking::multipart::Form, blocking::Client, StatusCode};
 
 /// GET from a URL
 pub(crate) fn http_get(api_key: &str, user_agent: &str, url: &str) -> Result<String, VtError> {

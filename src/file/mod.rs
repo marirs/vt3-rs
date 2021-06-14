@@ -1,5 +1,5 @@
-use std::{fs::File, io::Read};
 use reqwest::blocking::{multipart::Form, multipart::Part};
+use std::{fs::File, io::Read};
 
 mod response;
 use response::Root;
@@ -25,10 +25,7 @@ impl<'a> VtClient<'a> {
                 Err(e) => return Err(VtError::Io(e)),
             };
         }
-        let form_data = Form::new().part(
-            "file",
-            Part::bytes(buffer).file_name(file),
-        );
+        let form_data = Form::new().part("file", Part::bytes(buffer).file_name(file));
 
         let url = format!("{}/files", self.endpoint);
         let text = match http_multipart_post(self.api_key, self.user_agent, &url, form_data) {

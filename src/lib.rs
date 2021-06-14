@@ -1,4 +1,3 @@
-mod domain;
 /// VirusTotal API v3
 /// Clean & Simple interface to access the VirusTotal v3 REST api's
 /// ## Usage
@@ -13,8 +12,9 @@ mod domain;
 /// ```
 ///
 pub mod error;
-mod file;
 mod ip;
+mod file;
+mod domain;
 mod url;
 mod utils;
 
