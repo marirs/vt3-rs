@@ -21,6 +21,7 @@ pub use self::enterprise::retrohunt::SubmitJobRoot;
 mod utils;
 pub mod error;
 
+
 #[derive(Copy, Clone)]
 pub struct VtClient<'a> {
     api_key: &'a str,

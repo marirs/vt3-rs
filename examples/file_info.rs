@@ -12,10 +12,10 @@ fn main() {
             std::process::exit(1)
         }
     };
-    let file = "data/eicar.com.txt";
+    let file = "44d88612fea8a8f36de82e1278abb02f";
 
     let vt_client = VtClient::new(&api_key);
-    match vt_client.file_scan(file) {
+    match vt_client.file_info(file) {
         Ok(report) => println!("{:#?}", report),
         Err(e) => println!("Error: {}", e.to_string()),
     }

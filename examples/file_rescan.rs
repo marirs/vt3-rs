@@ -15,7 +15,7 @@ fn main() {
     let file = "44d88612fea8a8f36de82e1278abb02f";
 
     let vt_client = VtClient::new(&api_key);
-    match vt_client.file_info(file) {
+    match vt_client.file_rescan(file) {
         Ok(report) => println!("{:#?}", report),
         Err(e) => println!("Error: {}", e.to_string()),
     }
