@@ -20,6 +20,7 @@ pub(crate) fn http_get(api_key: &str, user_agent: &str, url: &str) -> Result<Str
 }
 
 /// GET from a URL with query params
+#[cfg(feature = "enterprise")]
 pub(crate) fn http_get_with_params(
     api_key: &str,
     user_agent: &str,
@@ -92,6 +93,7 @@ pub(crate) fn http_multipart_post(
 }
 
 /// POST to a URL with data in the body
+#[cfg(feature = "enterprise")]
 pub(crate) fn http_body_post(
     api_key: &str,
     user_agent: &str,
@@ -116,6 +118,7 @@ pub(crate) fn http_body_post(
 }
 
 /// DELETE
+#[cfg(feature = "enterprise")]
 pub(crate) fn http_delete(api_key: &str, user_agent: &str, url: &str) -> Result<String, VtError> {
     let client = Client::builder().user_agent(user_agent).build().unwrap();
     let resp = client

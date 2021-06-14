@@ -15,7 +15,10 @@ mod file;
 mod ip;
 mod url;
 mod domain;
+
+#[cfg(feature = "enterprise")]
 mod enterprise;
+#[cfg(feature = "enterprise")]
 pub use self::enterprise::retrohunt::SubmitJobRoot;
 
 mod utils;
