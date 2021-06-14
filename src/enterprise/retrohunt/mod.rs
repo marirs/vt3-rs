@@ -2,10 +2,10 @@ mod response;
 use response::SearchJobRoot;
 pub use response::SubmitJobRoot;
 
-use crate::utils::http_post;
 use crate::{
-    VtClient, error::VtError,
-    utils::{http_body_post, http_delete, http_get, http_get_with_params},
+    error::VtError,
+    utils::{http_body_post, http_delete, http_get, http_get_with_params, http_post},
+    VtClient,
 };
 
 impl<'a> VtClient<'a> {
@@ -54,7 +54,7 @@ impl<'a> VtClient<'a> {
         Ok(res)
     }
 
-    pub fn get_job_by_id(self, job_id: i32) -> Result<SearchJobRoot, VtError> {
+    pub fn get_job(self, job_id: &str) -> Result<SearchJobRoot, VtError> {
         //! Get RetroHunt job by ID
         //!
         //! ## Example Usage
@@ -62,7 +62,7 @@ impl<'a> VtClient<'a> {
         //! use vt3::VtClient;
         //!
         //! let vt = VtClient::new("Your API Key");
-        //! vt.get_job_by_id(1);
+        //! vt.get_job("1");
         //! ```
         let url = format!("{}/intelligence/retrohunt_jobs/{}", self.endpoint, job_id);
 
@@ -105,7 +105,7 @@ impl<'a> VtClient<'a> {
         Ok(res)
     }
 
-    pub fn delete_job(self, job_id: i32) -> Result<String, VtError> {
+    pub fn delete_job(self, job_id: &str) -> Result<String, VtError> {
         //! Delete RetroHunt job
         //!
         //! # Example
@@ -113,7 +113,7 @@ impl<'a> VtClient<'a> {
         //! use vt3::VtClient;
         //!
         //! let vt = VtClient::new("Your API Key");
-        //! vt.delete_job(1);
+        //! vt.delete_job("1");
         //! ```
         let url = format!("{}/intelligence/retrohunt_jobs/{}", self.endpoint, job_id);
         let text = match http_delete(self.api_key, self.user_agent, &url) {
@@ -124,7 +124,7 @@ impl<'a> VtClient<'a> {
         Ok(text)
     }
 
-    pub fn abort_job(self, job_id: i32) -> Result<String, VtError> {
+    pub fn abort_job(self, job_id: &str) -> Result<String, VtError> {
         //! Abort a RetroHunt job
         //!
         //! ## Example Usage
@@ -132,14 +132,13 @@ impl<'a> VtClient<'a> {
         //! use vt3::VtClient;
         //!
         //! let vt = VtClient::new("Your API Key");
-        //! vt.abort_job(1);
+        //! vt.abort_job("1");
         //! ```
-        let job_id = job_id.to_string();
         let url = format!(
             "{}/intelligence/retrohunt_jobs/{}/abort",
             self.endpoint, job_id
         );
-        let form_data = &[("id", job_id.as_str())];
+        let form_data = &[("id", job_id)];
 
         let text = match http_post(self.api_key, self.user_agent, &url, form_data) {
             Ok(res) => res,
