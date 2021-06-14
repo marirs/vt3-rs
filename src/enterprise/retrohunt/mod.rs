@@ -4,8 +4,9 @@ pub use response::SubmitJobRoot;
 
 use crate::utils::http_post;
 use crate::{
-    VtClient, error::VtError,
+    error::VtError,
     utils::{http_body_post, http_delete, http_get, http_get_with_params},
+    VtClient,
 };
 
 impl<'a> VtClient<'a> {

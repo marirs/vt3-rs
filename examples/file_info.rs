@@ -14,9 +14,7 @@ fn main() {
     };
     let file = "44d88612fea8a8f36de82e1278abb02f";
 
-    let res = VtClient::new(&api_key)
-        .user_agent("Chrome")
-        .file_info(file);
+    let res = VtClient::new(&api_key).user_agent("Chrome").file_info(file);
 
     match res {
         Ok(report) => println!("{:#?}", report),

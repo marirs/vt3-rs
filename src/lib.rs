@@ -1,3 +1,4 @@
+mod domain;
 /// VirusTotal API v3
 /// Clean & Simple interface to access the VirusTotal v3 REST api's
 /// ## Usage
@@ -14,16 +15,14 @@
 mod file;
 mod ip;
 mod url;
-mod domain;
 
 #[cfg(feature = "enterprise")]
 mod enterprise;
 #[cfg(feature = "enterprise")]
 pub use self::enterprise::retrohunt::SubmitJobRoot;
 
-mod utils;
 pub mod error;
-
+mod utils;
 
 #[derive(Copy, Clone)]
 pub struct VtClient<'a> {

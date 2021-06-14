@@ -1,10 +1,14 @@
-use std::{fs::File, io::Read};
 use reqwest::blocking::{multipart::Form, multipart::Part};
+use std::{fs::File, io::Read};
 
 mod response;
-use response::{ScanRoot, Root};
+use response::{Root, ScanRoot};
 
-use crate::{VtClient, error::VtError, utils::{http_multipart_post, http_post, http_get}};
+use crate::{
+    error::VtError,
+    utils::{http_get, http_multipart_post, http_post},
+    VtClient,
+};
 
 impl<'a> VtClient<'a> {
     pub fn file_info(self, id: &str) -> Result<Root, VtError> {
@@ -32,7 +36,7 @@ impl<'a> VtClient<'a> {
 
         Ok(res)
     }
-    
+
     pub fn file_scan(self, file: &'static str) -> Result<ScanRoot, VtError> {
         //! Upload and scan a file
         //!

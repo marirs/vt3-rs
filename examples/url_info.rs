@@ -14,8 +14,7 @@ fn main() {
     };
     let url = "https://www.example.com";
 
-    let res = VtClient::new(&api_key)
-        .url_info(url);
+    let res = VtClient::new(&api_key).url_info(url);
     match res {
         Ok(report) => println!("{:#?}", report),
         Err(e) => println!("Error: {}", e.to_string()),
