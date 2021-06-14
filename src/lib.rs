@@ -45,6 +45,12 @@ impl<'a> VtClient<'a> {
             user_agent: "rust-client/vt3-rs+https://github.com/marirs/vt3-rs",
         }
     }
+
+    /// Sets a new user-agent that from the default
+    pub fn user_agent(&'a mut self, user_agent: &'a str) -> &'a mut VtClient {
+        self.user_agent = user_agent;
+        self
+    }
 }
 
 #[cfg(test)]

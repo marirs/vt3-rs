@@ -36,13 +36,42 @@ fn main() {
     };
     let ip_address = "5.2.69.42";
 
-    let vt_client = VtClient::new(&api_key);
-    match vt_client.ip_info(ip_address) {
+    let res = VtClient::new(&api_key).ip_info(ip_address);
+    match res {
         Ok(report) => println!("{:#?}", report),
         Err(e) => println!("Error: {}", e.to_string()),
     }
 }
 ```
+- Providing a `user agent` for the client
+
+```rust
+use vt3::VtClient;
+
+fn main() {
+    let api_key = match std::env::args()
+        .skip(1)
+        .next()
+        .ok_or_else(|| "Please provide the api key!")
+    {
+        Ok(api_key) => api_key,
+        Err(e) => {
+            println!("{:?}", e);
+            std::process::exit(1)
+        }
+    };
+    let ip_address = "5.2.69.42";
+
+    let res = VtClient::new(&api_key)
+        .user_agent("Chrome Windows")
+        .ip_info(ip_address);
+    match res {
+        Ok(report) => println!("{:#?}", report),
+        Err(e) => println!("Error: {}", e.to_string()),
+    }
+}
+```
+
 
 ## Examples
 To run the examples:
