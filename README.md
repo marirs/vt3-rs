@@ -1,4 +1,4 @@
-# VirusTotal Api v3
+# VirusTotal Api v3 (Public & Enterprise)
 ![Crates.io](https://img.shields.io/crates/v/vt3)
 [![Documentation](https://docs.rs/vt3/badge.svg)](https://docs.rs/vt3)
 ![docs.rs](https://img.shields.io/docsrs/vt3/latest)
@@ -15,7 +15,7 @@ including those exclusive to VirusTotal Enterprise such as
 - Cargo.toml
 ```toml
 [dependencies]
-vt3 = "0.3.6"
+vt3 = "0.3.7"
 ```
 
 - and then: to get `ip information`
