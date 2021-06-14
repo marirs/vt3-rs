@@ -19,6 +19,30 @@ pub(crate) fn http_get(api_key: &str, user_agent: &str, url: &str) -> Result<Str
     }
 }
 
+/// GET from a URL with query params
+pub(crate) fn http_get_with_params(
+    api_key: &str,
+    user_agent: &str,
+    url: &str,
+    query_params: &[(&str, &str)],
+) -> Result<String, VtError> {
+    let client = Client::builder().user_agent(user_agent).build().unwrap();
+    let resp = client
+        .get(url)
+        .header("x-apikey", api_key)
+        .header("Accept", "application/json")
+        .query(query_params)
+        .send()
+        .unwrap();
+    let status = resp.status();
+    let text = resp.text().unwrap();
+
+    match status {
+        StatusCode::OK => Ok(text), // 200
+        _ => Err(error_from_status(status, &text)),
+    }
+}
+
 /// POST to a URL
 pub(crate) fn http_post(
     api_key: &str,
@@ -66,6 +90,49 @@ pub(crate) fn http_multipart_post(
         _ => Err(error_from_status(status, &text)),
     }
 }
+
+/// POST to a URL with data in the body
+pub(crate) fn http_body_post(
+    api_key: &str,
+    user_agent: &str,
+    url: &str,
+    data: String,
+) -> Result<String, VtError> {
+    let client = Client::builder().user_agent(user_agent).build().unwrap();
+    let resp = client
+        .post(url)
+        .header("x-apikey", api_key)
+        .header("Accept", "application/json")
+        .body(data)
+        .send()?;
+
+    let status = resp.status();
+    let text = resp.text().unwrap();
+
+    match status {
+        StatusCode::OK => Ok(text), // 200
+        _ => Err(error_from_status(status, &text)),
+    }
+}
+
+/// DELETE
+pub(crate) fn http_delete(api_key: &str, user_agent: &str, url: &str) -> Result<String, VtError> {
+    let client = Client::builder().user_agent(user_agent).build().unwrap();
+    let resp = client
+        .delete(url)
+        .header("x-apikey", api_key)
+        .header("Accept", "application/json")
+        .send()
+        .unwrap();
+    let status = resp.status();
+    let text = resp.text().unwrap();
+
+    match status {
+        StatusCode::OK => Ok(text), // 200
+        _ => Err(error_from_status(status, &text)),
+    }
+}
+
 
 /// Return the VtError based on the http status code
 fn error_from_status(status_code: StatusCode, resp_text: &str) -> VtError {

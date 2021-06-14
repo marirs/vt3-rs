@@ -11,12 +11,15 @@
 /// let vt_client = vt3::VtClient::new("YOUR API KEY");
 /// ```
 ///
-pub mod error;
-mod ip;
 mod file;
-mod domain;
+mod ip;
 mod url;
+mod domain;
+mod enterprise;
+pub use self::enterprise::retrohunt::SubmitJobRoot;
+
 mod utils;
+pub mod error;
 
 #[derive(Copy, Clone)]
 pub struct VtClient<'a> {
