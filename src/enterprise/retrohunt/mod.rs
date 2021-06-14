@@ -2,15 +2,11 @@ mod response;
 use response::SearchJobRoot;
 pub use response::SubmitJobRoot;
 
-use crate::{
-    error::VtError,
-    utils::{
-        http_get, http_get_with_params,
-        http_body_post, http_delete,
-    },
-    VtClient,
-};
 use crate::utils::http_post;
+use crate::{
+    VtClient, error::VtError,
+    utils::{http_body_post, http_delete, http_get, http_get_with_params},
+};
 
 impl<'a> VtClient<'a> {
     pub fn get_jobs(
@@ -139,7 +135,10 @@ impl<'a> VtClient<'a> {
         //! vt.abort_job(1);
         //! ```
         let job_id = job_id.to_string();
-        let url = format!("{}/intelligence/retrohunt_jobs/{}/abort", self.endpoint, job_id);
+        let url = format!(
+            "{}/intelligence/retrohunt_jobs/{}/abort",
+            self.endpoint, job_id
+        );
         let form_data = &[("id", job_id.as_str())];
 
         let text = match http_post(self.api_key, self.user_agent, &url, form_data) {
