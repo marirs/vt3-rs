@@ -22,7 +22,9 @@ pub enum VtError {
     WrongCredentialsError,
     #[error("The user account is not active. Make sure you properly activated your account by following the link sent to your email.")]
     UserNotActiveError,
-    #[error("The operation requires an authenticated user. Verify that you have provided your API key.")]
+    #[error(
+        "The operation requires an authenticated user. Verify that you have provided your API key."
+    )]
     AuthenticationRequiredError,
     #[error("Unsupported content search query.")]
     UnsupportedContentQueryError,
