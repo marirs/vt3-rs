@@ -19,11 +19,13 @@ mod domain;
 #[cfg(feature = "enterprise")]
 mod enterprise;
 #[cfg(feature = "enterprise")]
-pub use self::enterprise::retrohunt::SubmitJobRoot;
+pub use self::enterprise::{
+    retrohunt::SubmitJobRoot,
+    livehunt::SubmitRulesetRoot,
+};
 
 mod utils;
 pub mod error;
-
 
 #[derive(Copy, Clone)]
 pub struct VtClient<'a> {
