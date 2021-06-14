@@ -14,8 +14,9 @@ fn main() {
     };
     let file = "data/eicar.com.txt";
 
-    let vt_client = VtClient::new(&api_key);
-    match vt_client.file_scan(file) {
+    let res = VtClient::new(&api_key)
+        .file_scan(file);
+    match res {
         Ok(report) => println!("{:#?}", report),
         Err(e) => println!("Error: {}", e.to_string()),
     }

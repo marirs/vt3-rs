@@ -14,8 +14,10 @@ fn main() {
     };
     let ip_address = "5.2.69.42";
 
-    let vt_client = VtClient::new(&api_key);
-    match vt_client.ip_info(ip_address) {
+    let res = VtClient::new(&api_key)
+        .user_agent("Chrome for Windows")
+        .ip_info(ip_address);
+    match res {
         Ok(report) => println!("{:#?}", report),
         Err(e) => println!("Error: {}", e.to_string()),
     }

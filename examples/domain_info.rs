@@ -14,8 +14,9 @@ fn main() {
     };
     let domain = "google.com";
 
-    let vt_client = VtClient::new(&api_key);
-    match vt_client.domain_info(domain) {
+    let res = VtClient::new(&api_key)
+        .domain_info(domain);
+    match res {
         Ok(report) => println!("{:#?}", report),
         Err(e) => println!("Error: {}", e.to_string()),
     }
