@@ -54,10 +54,7 @@ impl<'a> VtClient<'a> {
         let form_data = &[("url", resource_id)];
         let text = match http_post(self.api_key, self.user_agent, &url, form_data) {
             Ok(res) => res,
-            Err(e) => {
-                println!("{}", e);
-                return Err(e);
-            }
+            Err(e) => return Err(e),
         };
 
         let res: ScanRoot = match serde_json::from_str(&text) {
