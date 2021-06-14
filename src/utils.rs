@@ -133,7 +133,6 @@ pub(crate) fn http_delete(api_key: &str, user_agent: &str, url: &str) -> Result<
     }
 }
 
-
 /// Return the VtError based on the http status code
 fn error_from_status(status_code: StatusCode, resp_text: &str) -> VtError {
     match status_code {
