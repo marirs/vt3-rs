@@ -56,7 +56,7 @@ impl VtClient {
     }
 
     /// Sets a new user-agent that from the default
-    pub fn user_agent(&mut self, user_agent: &str) -> &mut VtClient {
+    pub fn user_agent(mut self, user_agent: &str) -> VtClient {
         self.user_agent = user_agent.into();
         self
     }
