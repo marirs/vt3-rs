@@ -11,6 +11,7 @@
 /// let vt_client = vt3::VtClient::new("YOUR API KEY");
 /// ```
 ///
+mod comment;
 mod domain;
 mod file;
 mod ip;

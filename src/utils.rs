@@ -37,7 +37,6 @@ where
 }
 
 /// GET from a URL with query params
-#[cfg(feature = "enterprise")]
 pub(crate) fn http_get_with_params<T>(
     api_key: &str,
     user_agent: &str,
