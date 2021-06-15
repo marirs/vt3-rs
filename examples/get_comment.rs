@@ -8,9 +8,9 @@ fn main() {
             std::process::exit(1)
         }
     };
-    let url = "https://www.example.com";
+    let comment_id = "f-e710deb5471eba0b3f28ccc961142b996c6452cc75a4051e26a8aee08b860208-c5b18827";
 
-    let res = VtClient::new(&api_key).url_info(url);
+    let res = VtClient::new(&api_key).get_comment(comment_id);
     match res {
         Ok(report) => println!("{:#?}", report),
         Err(e) => println!("Error: {}", e.to_string()),

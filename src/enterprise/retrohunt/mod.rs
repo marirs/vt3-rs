@@ -76,7 +76,7 @@ impl VtClient {
     pub fn delete_job(&self, job_id: i32) -> VtResult<String> {
         //! Delete RetroHunt job
         //!
-        //! # Example
+        //! ## Example Usage
         //! ```rust
         //! use vt3::VtClient;
         //!

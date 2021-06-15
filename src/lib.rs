@@ -1,6 +1,5 @@
-mod domain;
 /// VirusTotal API v3
-/// Clean & Simple interface to access the VirusTotal v3 REST api's
+/// Clean & Simple interface to access the VirusTotal v3 Public & Enterprise REST api's
 /// ## Usage
 /// ```toml
 /// [dependencies]
@@ -12,6 +11,8 @@ mod domain;
 /// let vt_client = vt3::VtClient::new("YOUR API KEY");
 /// ```
 ///
+mod comment;
+mod domain;
 mod file;
 mod ip;
 mod url;
@@ -20,7 +21,7 @@ mod url;
 mod enterprise;
 
 #[cfg(feature = "enterprise")]
-pub use self::enterprise::retrohunt::SubmitJobRoot;
+pub use self::enterprise::{livehunt::SubmitRulesetRoot, retrohunt::SubmitJobRoot};
 
 static DEFAULT_USER_AGENT: &str = "rust-client/vt3-rs+https://github.com/marirs/vt3-rs";
 

@@ -1,7 +1,7 @@
 use vt3::VtClient;
 
 fn main() {
-    let api_key = match std::env::args().nth(2).ok_or("Please provide the api key!") {
+    let api_key = match std::env::args().nth(1).ok_or("Please provide the api key!") {
         Ok(api_key) => api_key,
         Err(e) => {
             println!("{:?}", e);

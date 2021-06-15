@@ -8,9 +8,8 @@ fn main() {
             std::process::exit(1)
         }
     };
-    let url = "https://www.example.com";
 
-    let res = VtClient::new(&api_key).url_info(url);
+    let res = VtClient::new(&api_key).get_comments(Some("10"), Some("tag:malware"), None);
     match res {
         Ok(report) => println!("{:#?}", report),
         Err(e) => println!("Error: {}", e.to_string()),

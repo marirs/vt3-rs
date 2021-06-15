@@ -37,7 +37,6 @@ where
 }
 
 /// GET from a URL with query params
-#[cfg(feature = "enterprise")]
 pub(crate) fn http_get_with_params<T>(
     api_key: &str,
     user_agent: &str,
@@ -120,7 +119,6 @@ where
 }
 
 /// DELETE
-#[cfg(feature = "enterprise")]
 pub(crate) fn http_delete<T>(api_key: &str, user_agent: &str, url: &str) -> VtResult<T>
 where
     T: DeserializeOwned,
@@ -130,6 +128,23 @@ where
         .delete(url)
         .header("x-apikey", api_key)
         // .header("Accept", "application/json")
+        .send()?;
+    process_resp(resp)
+}
+
+/// PATCH
+#[cfg(feature = "enterprise")]
+pub(crate) fn http_patch<S, T>(api_key: &str, user_agent: &str, url: &str, data: S) -> VtResult<T>
+where
+    S: Serialize,
+    T: DeserializeOwned,
+{
+    let client = Client::builder().user_agent(user_agent).build()?;
+    let resp = client
+        .patch(url)
+        .header("x-apikey", api_key)
+        // .header("Accept", "application/json")
+        .json(&data)
         .send()?;
     process_resp(resp)
 }
