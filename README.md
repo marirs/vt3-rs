@@ -69,7 +69,7 @@ fn main() {
     let ip_address = "5.2.69.42";
 
     let res = VtClient::new(&api_key)
-        .user_agent("Chrome Windows")
+        .user_agent("Chrome for Windows")
         .ip_info(ip_address);
     match res {
         Ok(report) => println!("{:#?}", report),
@@ -77,7 +77,6 @@ fn main() {
     }
 }
 ```
-
 
 ## Examples
 To run the examples:
@@ -89,6 +88,12 @@ To run the examples:
 - `cargo run --example file_info <your_api_key>`
 - `cargo run --example file_scan <your_api_key>`
 - `cargo run --example file_rescan <your_api_key>`
+- `cargo run --example get_latest_comments <your_api_key>`
+- `cargo run --example get_comment <your_api_key>`
+
+## VT Developer reference
+
+- https://developers.virustotal.com/v3.0/reference
 
 ---
 License: MIT
