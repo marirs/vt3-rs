@@ -18,7 +18,7 @@ pub struct SubmitJobRoot {
 #[serde(rename_all = "camelCase")]
 pub struct Data {
     #[serde(rename = "type")]
-    pub type_field: Option<String>,
+    pub _type: Option<String>,
     #[serde(skip_serializing)]
     pub id: Option<String>,
     #[serde(skip_serializing)]

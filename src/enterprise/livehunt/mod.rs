@@ -3,19 +3,18 @@ use response::SearchRulesetRoot;
 pub use response::SubmitRulesetRoot;
 
 use crate::{
-    error::VtError,
     utils::{http_body_post, http_delete, http_get, http_get_with_params, http_patch},
-    VtClient,
+    VtClient, VtResult,
 };
 
-impl<'a> VtClient<'a> {
+impl VtClient {
     pub fn get_rulesets(
         self,
         limit: Option<&str>,
         order: Option<&str>,
         filter: Option<&str>,
         cursor: Option<&str>,
-    ) -> Result<SearchRulesetRoot, VtError> {
+    ) -> VtResult<SearchRulesetRoot> {
         //! Retrieve VT Hunting livehunt rulesets
         //!
         //! ## Example Usage
@@ -40,25 +39,15 @@ impl<'a> VtClient<'a> {
             query_params.push(("cursor", c))
         }
 
-        let text = match http_get_with_params(
-            self.api_key,
-            self.user_agent,
+        http_get_with_params(
+            &self.api_key,
+            &self.user_agent,
             &url,
             &query_params.as_slice(),
-        ) {
-            Ok(res) => res,
-            Err(e) => return Err(e),
-        };
-
-        let res: SearchRulesetRoot = match serde_json::from_str(&text) {
-            Ok(r) => r,
-            Err(e) => return Err(VtError::Json(e)),
-        };
-
-        Ok(res)
+        )
     }
 
-    pub fn get_ruleset(self, ruleset_id: &str) -> Result<SearchRulesetRoot, VtError> {
+    pub fn get_ruleset(self, ruleset_id: &str) -> VtResult<SearchRulesetRoot> {
         //! Retrieve a VT Hunting Livehunt ruleset given by a id
         //!
         //! ## Example Usage
@@ -72,20 +61,10 @@ impl<'a> VtClient<'a> {
             "{}/intelligence/hunting_rulesets/{}",
             self.endpoint, ruleset_id
         );
-        let text = match http_get(self.api_key, self.user_agent, &url) {
-            Ok(res) => res,
-            Err(e) => return Err(e),
-        };
-
-        let res: SearchRulesetRoot = match serde_json::from_str(&text) {
-            Ok(r) => r,
-            Err(e) => return Err(VtError::Json(e)),
-        };
-
-        Ok(res)
+        http_get(&self.api_key, &self.user_agent, &url)
     }
 
-    pub fn create_ruleset(self, data: &SubmitRulesetRoot) -> Result<SubmitRulesetRoot, VtError> {
+    pub fn create_ruleset(self, data: &SubmitRulesetRoot) -> VtResult<SubmitRulesetRoot> {
         //! Create/Submit a new VT Hunting Livehunt ruleset
         //!
         //! ## Example Usage
@@ -97,24 +76,10 @@ impl<'a> VtClient<'a> {
         //! vt.create_ruleset(&data);
         //! ```
         let url = format!("{}/intelligence/hunting_rulesets", self.endpoint);
-        let js = match serde_json::to_string(data) {
-            Ok(j) => j,
-            Err(e) => return Err(VtError::Json(e)),
-        };
-        let text = match http_body_post(self.api_key, self.user_agent, &url, js) {
-            Ok(res) => res,
-            Err(e) => return Err(e),
-        };
-
-        let res: SubmitRulesetRoot = match serde_json::from_str(&text) {
-            Ok(r) => r,
-            Err(e) => return Err(VtError::Json(e)),
-        };
-
-        Ok(res)
+        http_body_post(&self.api_key, &self.user_agent, &url, data)
     }
 
-    pub fn delete_ruleset(self, ruleset_id: &str) -> Result<String, VtError> {
+    pub fn delete_ruleset(self, ruleset_id: &str) -> VtResult<String> {
         //! Delete/Remove Hunting ruleset by ID
         //!
         //! ## Example Usage
@@ -128,19 +93,14 @@ impl<'a> VtClient<'a> {
             "{}/intelligence/hunting_rulesets/{}",
             self.endpoint, ruleset_id
         );
-        let text = match http_delete(self.api_key, self.user_agent, &url) {
-            Ok(res) => res,
-            Err(e) => return Err(e),
-        };
-
-        Ok(text)
+        http_delete(&self.api_key, &self.user_agent, &url)
     }
 
     pub fn update_ruleset(
         self,
         ruleset_id: &str,
         data: &SubmitRulesetRoot,
-    ) -> Result<SubmitRulesetRoot, VtError> {
+    ) -> VtResult<SubmitRulesetRoot> {
         //! Update/Modify a VT Hunting Livehunt ruleset
         //!
         //! ## Example Usage
@@ -155,20 +115,6 @@ impl<'a> VtClient<'a> {
             "{}/intelligence/hunting_rulesets/{}",
             self.endpoint, ruleset_id
         );
-        let js = match serde_json::to_string(data) {
-            Ok(j) => j,
-            Err(e) => return Err(VtError::Json(e)),
-        };
-        let text = match http_patch(self.api_key, self.user_agent, &url, js) {
-            Ok(res) => res,
-            Err(e) => return Err(e),
-        };
-
-        let res: SubmitRulesetRoot = match serde_json::from_str(&text) {
-            Ok(r) => r,
-            Err(e) => return Err(VtError::Json(e)),
-        };
-
-        Ok(res)
+        http_patch(&self.api_key, &self.user_agent, &url, data)
     }
 }

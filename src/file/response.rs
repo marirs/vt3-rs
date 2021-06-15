@@ -11,7 +11,7 @@ pub struct ScanRoot {
 #[serde(rename_all = "camelCase")]
 pub struct ScanData {
     #[serde(rename = "type")]
-    pub type_field: String,
+    pub _type: String,
     pub id: String,
 }
 
@@ -19,7 +19,7 @@ pub struct ScanData {
 #[serde(rename_all = "camelCase")]
 pub struct Root {
     #[serde(rename = "type")]
-    pub type_field: Option<String>,
+    pub _type: Option<String>,
     pub id: Option<String>,
     pub links: Option<Links>,
     pub data: Option<Data>,
@@ -87,6 +87,7 @@ pub struct LastAnalysisResults {
     #[serde(rename = "engine_version")]
     pub engine_version: Option<String>,
     pub method: Option<String>,
+    // TODO: remove serde_json dependency
     pub result: Option<serde_json::Value>,
 }
 
