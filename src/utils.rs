@@ -4,6 +4,8 @@ use reqwest::{
     StatusCode,
 };
 use serde::de::DeserializeOwned;
+
+#[cfg(feature = "enterprise")]
 use std::io::{BufRead, BufReader};
 
 #[cfg(feature = "enterprise")]
