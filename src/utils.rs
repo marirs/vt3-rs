@@ -119,7 +119,6 @@ where
 }
 
 /// DELETE
-#[cfg(feature = "enterprise")]
 pub(crate) fn http_delete<T>(api_key: &str, user_agent: &str, url: &str) -> VtResult<T>
 where
     T: DeserializeOwned,
