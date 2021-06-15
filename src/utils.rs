@@ -3,12 +3,13 @@ use reqwest::{
     blocking::{multipart::Form, Client, Response},
     StatusCode,
 };
-
 use serde::de::DeserializeOwned;
+use std::io::{BufRead, BufReader};
 
 #[cfg(feature = "enterprise")]
 use serde::Serialize;
 
+/// Process a regular reqwest response
 #[inline]
 fn process_resp<T>(resp: Response) -> VtResult<T>
 where
@@ -18,6 +19,28 @@ where
 
     match status {
         StatusCode::OK => Ok(resp.json()?), // 200
+        _ => Err((status, resp.text()?).into()),
+    }
+}
+
+/// Process a bzipped reqwest response
+#[cfg(feature = "enterprise")]
+#[inline]
+fn process_resp_bz<T>(resp: Response) -> VtResult<Vec<T>>
+where
+    T: DeserializeOwned,
+{
+    let status = resp.status();
+
+    match status {
+        StatusCode::OK => {
+            let read = bzip2::read::BzDecoder::new(resp);
+            Ok(BufReader::new(read)
+                .lines()
+                .flatten()
+                .filter_map(|line| serde_json::from_str(&line).ok())
+                .collect()) // 200
+        }
         _ => Err((status, resp.text()?).into()),
     }
 }
@@ -34,6 +57,21 @@ where
         .header("Accept", "application/json")
         .send()?;
     process_resp(resp)
+}
+
+/// GET from a URL with bzipped response
+#[cfg(feature = "enterprise")]
+pub(crate) fn http_get_bz<T>(api_key: &str, user_agent: &str, url: &str) -> VtResult<Vec<T>>
+where
+    T: DeserializeOwned,
+{
+    let client = Client::builder().user_agent(user_agent).build()?;
+    let resp = client
+        .get(url)
+        .header("x-apikey", api_key)
+        .header("Accept", "application/json")
+        .send()?;
+    process_resp_bz(resp)
 }
 
 /// GET from a URL with query params
@@ -70,7 +108,6 @@ where
     let resp = client
         .post(url)
         .header("x-apikey", api_key)
-        // .header("Accept", "application/json")
         .form(form_data)
         .send()?;
     process_resp(resp)
@@ -90,7 +127,6 @@ where
     let resp = client
         .post(url)
         .header("x-apikey", api_key)
-        // .header("Accept", "application/json")
         .multipart(form_data)
         .send()?;
     process_resp(resp)
@@ -112,7 +148,6 @@ where
     let resp = client
         .post(url)
         .header("x-apikey", api_key)
-        // .header("Accept", "application/json")
         .json(&data)
         .send()?;
     process_resp(resp)
@@ -124,11 +159,7 @@ where
     T: DeserializeOwned,
 {
     let client = Client::builder().user_agent(user_agent).build()?;
-    let resp = client
-        .delete(url)
-        .header("x-apikey", api_key)
-        // .header("Accept", "application/json")
-        .send()?;
+    let resp = client.delete(url).header("x-apikey", api_key).send()?;
     process_resp(resp)
 }
 
@@ -143,7 +174,6 @@ where
     let resp = client
         .patch(url)
         .header("x-apikey", api_key)
-        // .header("Accept", "application/json")
         .json(&data)
         .send()?;
     process_resp(resp)

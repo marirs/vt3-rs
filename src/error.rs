@@ -43,7 +43,19 @@ pub enum VtError {
     #[error("{0}")]
     Io(#[from] std::io::Error),
     #[error("{0}")]
+    Json(serde_json::Error),
+    #[error("{0}")]
     Reqwest(#[from] reqwest::Error),
+}
+
+impl From<serde_json::Error> for VtError {
+    fn from(err: serde_json::Error) -> VtError {
+        use serde_json::error::Category;
+        match err.classify() {
+            Category::Io => VtError::Io(err.into()),
+            Category::Syntax | Category::Data | Category::Eof => VtError::Json(err),
+        }
+    }
 }
 
 /// Return the VtError based on the http status code
