@@ -1,6 +1,6 @@
 [package]
 name = "vt3"
-version = "0.5.2"
+version = "0.5.3"
 authors = ["Marirs <marirs@gmail.com>"]
 description = "VirusTotal REST API v3 (Public & Enterprise)"
 keywords = ["virustotal", "api", "v3"]
@@ -41,3 +41,23 @@ debug-assertions = false
 debug = false
 opt-level = 3
 lto = true
+
+[[example]]
+name = "user_info"
+path= "examples/enterprise/user_info.rs"
+required-features = ["enterprise"]
+
+[[example]]
+name = "api_usage"
+path= "examples/enterprise/api_usage.rs"
+required-features = ["enterprise"]
+
+[[example]]
+name = "overall_quotas"
+path= "examples/enterprise/overall_quotas.rs"
+required-features = ["enterprise"]
+
+[[example]]
+name = "group_info"
+path= "examples/enterprise/group_info.rs"
+required-features = ["enterprise"]

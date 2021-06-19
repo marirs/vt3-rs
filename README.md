@@ -15,13 +15,13 @@ including those exclusive to VirusTotal Enterprise such as
 - Cargo.toml
 ```toml
 [dependencies]
-vt3 = "0.5.2"
+vt3 = "0.5.3"
 ```
 
 - to enable enterprise features
 ```toml
 [dependencies]
-vt3 = { version = "0.5.2", features = ["enterprise"] }
+vt3 = { version = "0.5.3", features = ["enterprise"] }
 ```
 
 - and then: to get `ip information`
@@ -79,17 +79,24 @@ fn main() {
 ```
 
 ## Examples
-To run the examples:
-- `cargo run --example domain_info <your_api_key>`
-- `cargo run --example ip_info <your_api_key>`
-- `cargo run --example url_info <your_api_key>`
-- `cargo run --example url_info_by_id <your_api_key>`
-- `cargo run --example url_rescan <your_api_key>`
-- `cargo run --example file_info <your_api_key>`
-- `cargo run --example file_scan <your_api_key>`
-- `cargo run --example file_rescan <your_api_key>`
-- `cargo run --example get_latest_comments <your_api_key>`
-- `cargo run --example get_comment <your_api_key>`
+To run the examples - `Universal API Endpoints`:
+- Domain info: `cargo run --example domain_info <your_api_key>`
+- IP info: `cargo run --example ip_info <your_api_key>`
+- URL info: `cargo run --example url_info <your_api_key>`
+- URL info by id: `cargo run --example url_info_by_id <your_api_key>`
+- URL rescan: `cargo run --example url_rescan <your_api_key>`
+- File info: `cargo run --example file_info <your_api_key>`
+- File scan: `cargo run --example file_scan <your_api_key>`
+- File rescan: `cargo run --example file_rescan <your_api_key>`
+- Get latest comments: `cargo run --example get_latest_comments <your_api_key>`
+- Get comment by comment id: `cargo run --example get_comment <your_api_key>`
+
+To run the examples - `Enterprise API Endpoints`:
+- Get user information: `cargo run --example user_info --features="enterprise" <your_api_key> <user_id>`
+- Delete a user: `cargo run --example delete_user --features="enterprise" <your_api_key> <user_id>`
+- Get Api usage info: `cargo run --example api_usage --features="enterprise" <your_api_key> <user_id>`
+- Get overall quotas for user: `cargo run --example overall_quotas --features="enterprise" <your_api_key> <user_id>`
+- Get group information: `cargo run --example group_info --features="enterprise" <your_api_key> <user_id>`
 
 ## VT Developer reference
 

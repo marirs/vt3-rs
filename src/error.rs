@@ -4,7 +4,7 @@ use thiserror::Error;
 
 #[derive(Debug, Error)]
 pub enum VtError {
-    #[error("You have exceeded one of your quotas (minute, daily or monthly). Daily quotas are reset every day at 00:00 UTC. You may have run out of disk space and/or number of files on your VirusTotal Monitor account.")]
+    #[error("You have exceeded one of your quotas (minute, daily or monthly). Daily quotas are reset every day at 00:00 UTC. You may have run out of disk space and/or number of files on your VirusTotal Monitor accounts.")]
     QuotaExceededError,
     #[error("Too many requests.")]
     TooManyRequestsError,
@@ -22,7 +22,7 @@ pub enum VtError {
     ForbiddenError,
     #[error("The provided API key is incorrect.")]
     WrongCredentialsError,
-    #[error("The user account is not active. Make sure you properly activated your account by following the link sent to your email.")]
+    #[error("The user accounts is not active. Make sure you properly activated your accounts by following the link sent to your email.")]
     UserNotActiveError,
     #[error(
         "The operation requires an authenticated user. Verify that you have provided your API key."
