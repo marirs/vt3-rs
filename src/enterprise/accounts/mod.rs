@@ -1,7 +1,10 @@
 mod response;
-use response::{UserRoot, ApiUsage, OverallQuotaRoot, GroupRoot};
+use response::{ApiUsage, GroupRoot, OverallQuotaRoot, UserRoot};
 
-use crate::{utils::{http_get, http_delete}, VtClient, VtResult};
+use crate::{
+    utils::{http_delete, http_get},
+    VtClient, VtResult,
+};
 
 impl VtClient {
     pub fn user_info(&self, id: &str) -> VtResult<UserRoot> {

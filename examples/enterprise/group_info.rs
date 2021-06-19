@@ -2,7 +2,10 @@ use vt3::VtClient;
 
 fn main() {
     let mut args = std::env::args().skip(1);
-    let api_key = match args.next().ok_or("Please provide the api key as 1st argument!") {
+    let api_key = match args
+        .next()
+        .ok_or("Please provide the api key as 1st argument!")
+    {
         Ok(api_key) => api_key,
         Err(e) => {
             println!("{:?}", e);
@@ -10,7 +13,10 @@ fn main() {
         }
     };
 
-    let user_id = match args.next().ok_or("Please provide the user id as 2nd argument!") {
+    let user_id = match args
+        .next()
+        .ok_or("Please provide the user id as 2nd argument!")
+    {
         Ok(api_key) => api_key,
         Err(e) => {
             println!("{:?}", e);

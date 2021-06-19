@@ -11,7 +11,7 @@ pub struct UserRoot {
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ApiUsage {
-    pub data: Option<ApiUsageData>
+    pub data: Option<ApiUsageData>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -58,7 +58,7 @@ pub struct Attributes {
     pub user_since: Option<i64>,
     pub privileges: Option<HashMap<String, Privilege>>,
     pub quotas: Option<Quotas>,
-    pub preferences: HashMap<String, Value>
+    pub preferences: HashMap<String, Value>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -151,7 +151,7 @@ pub struct OverallQuotaObject {
 pub struct Quota {
     pub allowed: Option<i64>,
     pub used: Option<i64>,
-    pub inherited_from: Option<String>
+    pub inherited_from: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -200,5 +200,5 @@ pub struct GroupAttributes {
     #[serde(rename = "contact_emails")]
     pub contact_emails: Option<Vec<String>>,
     #[serde(rename = "quota_usage_by_user")]
-    pub quota_usage_by_user: Option<HashMap<String, Value>>
+    pub quota_usage_by_user: Option<HashMap<String, Value>>,
 }
