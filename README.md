@@ -6,22 +6,68 @@
 [![GitHub license](https://img.shields.io/github/license/marirs/vt3-rs)](https://github.com/marirs/vt3-rs/blob/main/LICENSE)
 
 VT3 provides an easy api interface to use VirusTotal v3 REST endpoints, 
-including those exclusive to VirusTotal Enterprise such as 
-- Live Hunt
-- Retro Hunt 
-- Zip Files 
+including those exclusive to VirusTotal Enterprise. See below for list of available API's:  
+
+- Public API
+  - IP
+    - Get IP information
+  - Domain
+    - Get Domain information
+  - File
+    - Get File information
+    - Upload File to Scan
+    - File ReScan
+  - Url  
+    - Get Url information
+    - Get Url information by ID
+    - Url Scan
+    - Url ReScan
+- Enterprise - `features = ["enterprise"]`
+  - Users & Groups
+    - Get User information
+    - Delete a User
+    - API Usage
+    - Overall Quotas
+    - Get Group information
+    - Get all Group Members
+    - Get Group API Usage
+- Hunting (Enterprise) - `features = ["hunting"]`
+  - Live hunt
+    - Get Live hunt Rulesets
+    - Get Ruleset by ruleset id
+    - Create Ruleset
+    - Delete Ruleset
+    - Update Ruleset  
+  - Retro hunt  
+    - Get Retrohunt jobs
+    - Get Retrohunt job by job id
+    - Create a Retrohunt job
+    - Delete a Retrohunt job
+    - Abort a Retrohunt job
+- Feeds (Enterprise) - `features = ["feeds"]`
+  - File feeds
+    - Get file feed batch
+    - Get file feed batch hourly
+  - Url feeds
+    - Get Url feed batch
+    - Get Url feed batch hourly
+
+## Available `feature` flags
+- enterprise
+- feeds
+- hunting
 
 ## Usage
 - Cargo.toml
 ```toml
 [dependencies]
-vt3 = "0.6.0"
+vt3 = "0.7.0"
 ```
 
 - to enable enterprise features
 ```toml
 [dependencies]
-vt3 = { version = "0.6.0", features = ["enterprise"] }
+vt3 = { version = "0.7.0", features = ["enterprise"] }
 ```
 
 - and then: to get `ip information`
@@ -89,7 +135,7 @@ To run the examples - `Universal API Endpoints`:
 - File scan: `cargo run --example file_scan <your_api_key>`
 - File rescan: `cargo run --example file_rescan <your_api_key>`
 - Get latest comments: `cargo run --example get_latest_comments <your_api_key>`
-- Get comment by comment id: `cargo run --example get_comment <your_api_key>`
+- Get comment by id: `cargo run --example get_comment <your_api_key>`
 
 To run the examples - `Enterprise API Endpoints`:
 - Get user information: `cargo run --example user_info --features="enterprise" <your_api_key> <user_id>`
@@ -99,8 +145,10 @@ To run the examples - `Enterprise API Endpoints`:
 - Get group information: `cargo run --example group_info --features="enterprise" <your_api_key> <group_id>`
 - Get group api usage: `cargo run --example group_api_usage --features="enterprise" <your_api_key> <group_id>`
 - Get group members: `cargo run --example group_members --features="enterprise" <your_api_key> <group_id>`
-- Get Livehunt rulesets: `cargo run --example livehunt_get_rulesets --features="enterprise" <your_api_key>`
-- Get Retrohunt jobs: `cargo run --example retrohunt_jobs --features="enterprise" <your_api_key>`
+ 
+To run the examples - `Hunting API Endpoint`: 
+- Get Livehunt rulesets: `cargo run --example livehunt_get_rulesets --features="hunting" <your_api_key>`
+- Get Retrohunt jobs: `cargo run --example retrohunt_jobs --features="hunting" <your_api_key>`
 
 ## VT Developer reference
 

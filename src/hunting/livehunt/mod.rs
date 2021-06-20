@@ -1,6 +1,6 @@
 mod response;
 use response::SearchRulesetRoot;
-pub use response::SubmitRulesetRoot;
+pub use response::SubmitLivehuntRuleset;
 
 use crate::{
     utils::{http_body_post, http_delete, http_get, http_get_with_params, http_patch},
@@ -64,15 +64,15 @@ impl VtClient {
         http_get(&self.api_key, &self.user_agent, &url)
     }
 
-    pub fn create_ruleset(&self, data: &SubmitRulesetRoot) -> VtResult<SubmitRulesetRoot> {
+    pub fn create_ruleset(&self, data: &SubmitLivehuntRuleset) -> VtResult<SubmitLivehuntRuleset> {
         //! Create/Submit a new VT Hunting Livehunt ruleset
         //!
         //! ## Example Usage
         //! ```rust
-        //! use vt3::{VtClient, SubmitRulesetRoot};
+        //! use vt3::{VtClient, SubmitLivehuntRuleset};
         //!
         //! let vt = VtClient::new("Your API Key");
-        //! let mut data = SubmitRulesetRoot::default();
+        //! let mut data = SubmitLivehuntRuleset::default();
         //! vt.create_ruleset(&data);
         //! ```
         let url = format!("{}/intelligence/hunting_rulesets", self.endpoint);
@@ -99,16 +99,16 @@ impl VtClient {
     pub fn update_ruleset(
         &self,
         ruleset_id: &str,
-        data: &SubmitRulesetRoot,
-    ) -> VtResult<SubmitRulesetRoot> {
+        data: &SubmitLivehuntRuleset,
+    ) -> VtResult<SubmitLivehuntRuleset> {
         //! Update/Modify a VT Hunting Livehunt ruleset
         //!
         //! ## Example Usage
         //! ```rust
-        //! use vt3::{VtClient, SubmitRulesetRoot};
+        //! use vt3::{VtClient, SubmitLivehuntRuleset};
         //!
         //! let vt = VtClient::new("Your API Key");
-        //! let mut data = SubmitRulesetRoot::default();
+        //! let mut data = SubmitLivehuntRuleset::default();
         //! vt.update_ruleset("1", &data);
         //! ```
         let url = format!(

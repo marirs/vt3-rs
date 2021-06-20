@@ -1,6 +1,6 @@
 mod response;
 use response::SearchJobRoot;
-pub use response::SubmitJobRoot;
+pub use response::SubmitRetrohuntJob;
 
 use crate::utils::http_post;
 use crate::{
@@ -58,15 +58,15 @@ impl VtClient {
         http_get(&self.api_key, &self.user_agent, &url)
     }
 
-    pub fn create_retrohunt_job(&self, data: &SubmitJobRoot) -> VtResult<SubmitJobRoot> {
+    pub fn create_retrohunt_job(&self, data: &SubmitRetrohuntJob) -> VtResult<SubmitRetrohuntJob> {
         //! Create/Submit a RetroHunt job
         //!
         //! ## Example Usage
         //! ```rust
-        //! use vt3::{VtClient, SubmitJobRoot};
+        //! use vt3::{VtClient, SubmitRetrohuntJob};
         //!
         //! let vt = VtClient::new("Your API Key");
-        //! let mut data = SubmitJobRoot::default();
+        //! let mut data = SubmitRetrohuntJob::default();
         //! vt.create_retrohunt_job(&data);
         //! ```
         let url = format!("{}/intelligence/retrohunt_jobs", &self.endpoint);

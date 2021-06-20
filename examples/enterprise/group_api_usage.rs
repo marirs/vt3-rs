@@ -24,7 +24,8 @@ fn main() {
         }
     };
 
-    let res = VtClient::new(&api_key).group_api_usage(&group_id, Some("20210618"), Some("20210620"));
+    let res =
+        VtClient::new(&api_key).group_api_usage(&group_id, Some("20210618"), Some("20210620"));
     match res {
         Ok(report) => println!("{:#?}", report),
         Err(e) => println!("Error: {}", e.to_string()),

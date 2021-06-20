@@ -1,13 +1,13 @@
 [package]
 name = "vt3"
-version = "0.6.0"
+version = "0.7.0"
 authors = ["Marirs <marirs@gmail.com>"]
 description = "VirusTotal REST API v3 (Public & Enterprise)"
 keywords = ["virustotal", "api", "v3"]
 categories = ["api-bindings"]
 repository = "https://github.com/marirs/marirs/vt3-rs"
 readme = "README.md"
-license-file = "LICENSE"
+license-public_api.file = "LICENSE"
 exclude = ["examples", "data"]
 edition = "2018"
 
@@ -23,7 +23,10 @@ serde_json = "1.0.64"
 thiserror = "1.0.25"
 
 [features]
-enterprise = ["bzip2"]
+enterprise = []
+feeds = ["bzip2"]
+hunting = []
+all = ["enterprise", "feeds", "hunting"]
 
 [lib]
 name = "vt3"
@@ -74,10 +77,10 @@ required-features = ["enterprise"]
 
 [[example]]
 name = "retrohunt_jobs"
-path= "examples/enterprise/retrohunt_jobs.rs"
-required-features = ["enterprise"]
+path= "examples/hunting/retrohunt_jobs.rs"
+required-features = ["hunting"]
 
 [[example]]
 name = "livehunt_get_rulesets"
-path= "examples/enterprise/livehunt_get_rulesets.rs"
-required-features = ["enterprise"]
+path= "examples/hunting/livehunt_get_rulesets.rs"
+required-features = ["hunting"]

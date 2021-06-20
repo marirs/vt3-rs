@@ -5,10 +5,10 @@ use reqwest::{
 };
 use serde::de::DeserializeOwned;
 
-#[cfg(feature = "enterprise")]
+#[cfg(feature = "feeds")]
 use std::io::{BufRead, BufReader};
 
-#[cfg(feature = "enterprise")]
+#[cfg(feature = "hunting")]
 use serde::Serialize;
 
 /// Process a regular reqwest response
@@ -26,7 +26,7 @@ where
 }
 
 /// Process a bzipped reqwest response
-#[cfg(feature = "enterprise")]
+#[cfg(feature = "feeds")]
 #[inline]
 fn process_resp_bz<T>(resp: Response) -> VtResult<Vec<T>>
 where
@@ -62,7 +62,7 @@ where
 }
 
 /// GET from a URL with bzipped response
-#[cfg(feature = "enterprise")]
+#[cfg(feature = "feeds")]
 pub(crate) fn http_get_bz<T>(api_key: &str, user_agent: &str, url: &str) -> VtResult<Vec<T>>
 where
     T: DeserializeOwned,
@@ -135,7 +135,7 @@ where
 }
 
 /// POST to a URL with data in the body
-#[cfg(feature = "enterprise")]
+#[cfg(feature = "hunting")]
 pub(crate) fn http_body_post<S, T>(
     api_key: &str,
     user_agent: &str,
@@ -166,7 +166,7 @@ where
 }
 
 /// PATCH
-#[cfg(feature = "enterprise")]
+#[cfg(feature = "hunting")]
 pub(crate) fn http_patch<S, T>(api_key: &str, user_agent: &str, url: &str, data: S) -> VtResult<T>
 where
     S: Serialize,

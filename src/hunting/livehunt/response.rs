@@ -2,15 +2,15 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct SearchJobRoot {
+pub struct SearchRulesetRoot {
     pub data: Option<Vec<Data>>,
-    pub links: Option<Links>,
     pub meta: Option<Meta>,
+    pub links: Option<Links>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct SubmitJobRoot {
+pub struct SubmitLivehuntRuleset {
     pub data: Data,
 }
 
@@ -19,9 +19,9 @@ pub struct SubmitJobRoot {
 pub struct Data {
     #[serde(rename = "type")]
     pub _type: Option<String>,
-    #[serde(skip_serializing)]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
-    #[serde(skip_serializing)]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub links: Option<Links>,
     pub attributes: Option<Attributes>,
 }
@@ -29,31 +29,16 @@ pub struct Data {
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Attributes {
-    #[serde(rename = "creation_date")]
+    #[serde(rename = "creation_date", skip_serializing_if = "Option::is_none")]
     pub creation_date: Option<i64>,
-    pub corpus: Option<String>,
-    #[serde(rename = "finish_date")]
-    pub finish_date: Option<i64>,
-    pub progress: Option<f64>,
-    pub rules: String,
-    #[serde(rename = "scanned_bytes")]
-    pub scanned_bytes: Option<i64>,
-    #[serde(rename = "start_date")]
-    pub start_date: Option<i64>,
-    pub status: Option<String>,
-    pub notification_email: Option<String>,
-    #[serde(rename = "total_matches")]
-    pub total_matches: Option<i64>,
-    #[serde(rename = "time_range")]
-    pub time_range: Option<TimeRange>,
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Links {
-    pub next: Option<String>,
-    #[serde(rename = "self")]
-    pub self_field: Option<String>,
+    pub enabled: Option<bool>,
+    pub limit: Option<i64>,
+    #[serde(rename = "modification_date", skip_serializing_if = "Option::is_none")]
+    pub modification_date: Option<i64>,
+    pub name: Option<String>,
+    #[serde(rename = "notification_emails")]
+    pub notification_emails: Option<Vec<String>>,
+    pub rules: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -64,7 +49,8 @@ pub struct Meta {
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct TimeRange {
-    pub start: i64,
-    pub end: i64,
+pub struct Links {
+    #[serde(rename = "self")]
+    pub self_field: Option<String>,
+    pub next: Option<String>,
 }

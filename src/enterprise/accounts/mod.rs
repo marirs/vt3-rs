@@ -1,5 +1,5 @@
 mod response;
-use response::{ApiUsage, GroupRoot, OverallQuotaRoot, UserRoot, GroupMembers};
+use response::{ApiUsage, GroupMembers, GroupRoot, OverallQuotaRoot, UserRoot};
 
 use crate::{
     utils::{http_delete, http_get, http_get_with_params},

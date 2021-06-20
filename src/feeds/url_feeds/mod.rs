@@ -21,7 +21,7 @@ impl VtClient {
     }
 
     pub fn url_feed_hourly(&self, time: &str) -> VtResult<Vec<Root>> {
-        //! Hourly file feed batch.
+        //! Hourly public_api.file feed batch.
         //!
         //! ## Example Usage
         //! ```rust

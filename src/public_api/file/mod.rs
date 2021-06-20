@@ -11,8 +11,8 @@ use crate::{
 
 impl VtClient {
     pub fn file_info(&self, id: &str) -> VtResult<Root> {
-        //! Retrieve file scan reports
-        //! id: SHA-256, SHA-1 or MD5 identifying the file
+        //! Retrieve public_api.file scan reports
+        //! id: SHA-256, SHA-1 or MD5 identifying the public_api.file
         //!
         //! ## Example Usage
         //! ```rust
@@ -26,7 +26,7 @@ impl VtClient {
     }
 
     pub fn file_scan(&self, file: &str) -> VtResult<ScanRoot> {
-        //! Upload and scan a file
+        //! Upload and scan a public_api.file
         //!
         //! ## Example Usage
         //! ```rust
@@ -40,14 +40,17 @@ impl VtClient {
         {
             f.read_to_end(&mut buffer)?;
         }
-        let form_data = Form::new().part("file", Part::bytes(buffer).file_name(file.to_owned()));
+        let form_data = Form::new().part(
+            "public_api.file",
+            Part::bytes(buffer).file_name(file.to_owned()),
+        );
         let url = format!("{}/files", &self.endpoint);
         http_multipart_post(&self.api_key, &self.user_agent, &url, form_data)
     }
 
     pub fn file_rescan(&self, id: &str) -> VtResult<ScanRoot> {
         //! Re-submit/Re-scan already submitted files
-        //! id: SHA-256, SHA-1 or MD5 identifying the file
+        //! id: SHA-256, SHA-1 or MD5 identifying the public_api.file
         //!
         //! ## Example Usage
         //! ```rust

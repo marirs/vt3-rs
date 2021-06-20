@@ -5,7 +5,7 @@ use crate::{utils::http_get_bz, VtClient, VtResult};
 
 impl VtClient {
     pub fn file_feed(&self, time: &str) -> VtResult<Vec<Root>> {
-        //! Get a file feed batch.
+        //! Get a public_api.file feed batch.
         //!
         //! ## Example Usage
         //! ```rust
@@ -21,7 +21,7 @@ impl VtClient {
     }
 
     pub fn file_feed_hourly(&self, time: &str) -> VtResult<Vec<Root>> {
-        //! Hourly file feed packages.
+        //! Hourly public_api.file feed packages.
         //!
         //! ## Example Usage
         //! ```rust

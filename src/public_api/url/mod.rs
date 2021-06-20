@@ -19,7 +19,7 @@ impl VtClient {
         //! println!("{:?}", vt.url_scan(url));
         //! ```
         let url = format!("{}/urls", &self.endpoint);
-        let form_data = &[("url", resource_url)];
+        let form_data = &[("public_api.url", resource_url)];
         http_post(&self.api_key, &self.user_agent, &url, form_data)
     }
 
@@ -37,7 +37,7 @@ impl VtClient {
         //! ```
         let url_id = resource_id.split('-').nth(1).unwrap_or(resource_id);
         let url = format!("{}/urls/{}/analyse", &self.endpoint, url_id);
-        let form_data = &[("url", resource_id)];
+        let form_data = &[("public_api.url", resource_id)];
         http_post(&self.api_key, &self.user_agent, &url, form_data)
     }
 
@@ -63,7 +63,7 @@ impl VtClient {
 
     pub fn url_info_by_id(&self, resource_id: &str) -> VtResult<Root> {
         //! Get the report of a given Url by its resource id. Generally you can first
-        //! submit a url for scanning, and then, get the resource_id (`data.id`)
+        //! submit a public_api.url for scanning, and then, get the resource_id (`data.id`)
         //! and then url_info_by_id(data.id)
         //!
         //! ## Example Usage

@@ -1,5 +1,10 @@
 /// VirusTotal API v3
-/// Clean & Simple interface to access the VirusTotal v3 Public & Enterprise REST api's
+/// Clean & Simple interface to access the VirusTotal v3 Public & Enterprise REST api's.
+/// ### Available `feature` flags
+/// - hunting
+/// - feeds
+/// - enterprise
+///
 /// ## Usage
 /// ```toml
 /// [dependencies]
@@ -11,19 +16,20 @@
 /// let vt_client = vt3::VtClient::new("YOUR API KEY");
 /// ```
 ///
-mod comment;
-mod domain;
-mod file;
-mod ip;
-mod url;
+mod public_api;
 
 #[cfg(feature = "enterprise")]
 mod enterprise;
 
-#[cfg(feature = "enterprise")]
-pub use self::enterprise::{livehunt::SubmitRulesetRoot, retrohunt::SubmitJobRoot};
+#[cfg(feature = "feeds")]
+mod feeds;
 
-static DEFAULT_USER_AGENT: &str = "rust-client/vt3-rs+https://github.com/marirs/vt3-rs";
+#[cfg(feature = "hunting")]
+mod hunting;
+#[cfg(feature = "hunting")]
+pub use self::hunting::{livehunt::SubmitLivehuntRuleset, retrohunt::SubmitRetrohuntJob};
+
+static DEFAULT_USER_AGENT: &str = "rust-client/vt3+https://github.com/marirs/vt3-rs";
 
 pub mod error;
 mod utils;

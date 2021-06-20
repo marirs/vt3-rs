@@ -43,7 +43,7 @@ impl VtClient {
     }
 
     pub fn get_comment(self, comment_id: &str) -> VtResult<CommentRoot> {
-        //! Retrieve a comment information.
+        //! Retrieve a public_api.comment information.
         //!
         //! ## Example Usage
         //! ```rust
@@ -58,7 +58,7 @@ impl VtClient {
     }
 
     pub fn delete_comment(self, comment_id: &str) -> VtResult<CommentRoot> {
-        //! Delete a comment.
+        //! Delete a public_api.comment.
         //!
         //! ## Example Usage
         //! ```rust
