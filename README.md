@@ -99,6 +99,8 @@ To run the examples - `Enterprise API Endpoints`:
 - Get group information: `cargo run --example group_info --features="enterprise" <your_api_key> <user_id>`
 - Get api usage: `cargo run --example group_api_usage --features="enterprise" <your_api_key> <user_id>`
 - Get group members: `cargo run --example group_members --features="enterprise" <your_api_key> <user_id>`
+- Get Livehunt rulesets: `cargo run --example livehunt_get_rulesets --features="enterprise" <your_api_key> <user_id>`
+- Get Retrohunt jobs: `cargo run --example retrohunt_jobs --features="enterprise" <your_api_key> <user_id>`
 
 ## VT Developer reference
 
