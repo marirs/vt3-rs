@@ -11,4 +11,4 @@ matrix:
     - rust: nightly
 script:
   - cargo build
-  - cargo test --features "enterprise"
+  - cargo test --features "all"
