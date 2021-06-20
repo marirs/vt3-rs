@@ -9,7 +9,7 @@ use crate::{
 
 impl VtClient {
     pub fn get_rulesets(
-        self,
+        &self,
         limit: Option<&str>,
         order: Option<&str>,
         filter: Option<&str>,
@@ -47,7 +47,7 @@ impl VtClient {
         )
     }
 
-    pub fn get_ruleset(self, ruleset_id: &str) -> VtResult<SearchRulesetRoot> {
+    pub fn get_ruleset(&self, ruleset_id: &str) -> VtResult<SearchRulesetRoot> {
         //! Retrieve a VT Hunting Livehunt ruleset given by a id
         //!
         //! ## Example Usage
@@ -64,7 +64,7 @@ impl VtClient {
         http_get(&self.api_key, &self.user_agent, &url)
     }
 
-    pub fn create_ruleset(self, data: &SubmitRulesetRoot) -> VtResult<SubmitRulesetRoot> {
+    pub fn create_ruleset(&self, data: &SubmitRulesetRoot) -> VtResult<SubmitRulesetRoot> {
         //! Create/Submit a new VT Hunting Livehunt ruleset
         //!
         //! ## Example Usage
@@ -79,7 +79,7 @@ impl VtClient {
         http_body_post(&self.api_key, &self.user_agent, &url, data)
     }
 
-    pub fn delete_ruleset(self, ruleset_id: &str) -> VtResult<String> {
+    pub fn delete_ruleset(&self, ruleset_id: &str) -> VtResult<String> {
         //! Delete/Remove Hunting ruleset by ID
         //!
         //! ## Example Usage
@@ -97,7 +97,7 @@ impl VtClient {
     }
 
     pub fn update_ruleset(
-        self,
+        &self,
         ruleset_id: &str,
         data: &SubmitRulesetRoot,
     ) -> VtResult<SubmitRulesetRoot> {
