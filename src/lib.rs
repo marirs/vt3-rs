@@ -5,11 +5,6 @@
 /// - feeds
 /// - enterprise
 ///
-/// ## Usage
-/// ```toml
-/// [dependencies]
-/// vt3 = "0.1.0"
-/// ```
 /// ```rust
 /// use vt3;
 ///
