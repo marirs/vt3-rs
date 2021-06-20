@@ -15,13 +15,13 @@ including those exclusive to VirusTotal Enterprise such as
 - Cargo.toml
 ```toml
 [dependencies]
-vt3 = "0.5.4"
+vt3 = "0.6.0"
 ```
 
 - to enable enterprise features
 ```toml
 [dependencies]
-vt3 = { version = "0.5.4", features = ["enterprise"] }
+vt3 = { version = "0.6.0", features = ["enterprise"] }
 ```
 
 - and then: to get `ip information`

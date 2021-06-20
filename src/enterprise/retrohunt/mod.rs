@@ -9,7 +9,7 @@ use crate::{
 };
 
 impl VtClient {
-    pub fn get_jobs(
+    pub fn get_retrohunt_jobs(
         &self,
         limit: Option<&str>,
         filter: Option<&str>,
@@ -22,7 +22,7 @@ impl VtClient {
         //! use vt3::VtClient;
         //!
         //! let vt = VtClient::new("Your API Key");
-        //! vt.get_jobs(Some("10"), None, None);
+        //! vt.get_retrohunt_jobs(Some("10"), None, None);
         //! ```
         let url = format!("{}/intelligence/retrohunt_jobs", &self.endpoint);
         let mut query_params: Vec<(&str, &str)> = Vec::new();
@@ -44,7 +44,7 @@ impl VtClient {
         )
     }
 
-    pub fn get_job_by_id(&self, job_id: i32) -> VtResult<SearchJobRoot> {
+    pub fn get_retrohunt_job(&self, job_id: i32) -> VtResult<SearchJobRoot> {
         //! Get RetroHunt job by ID
         //!
         //! ## Example Usage
@@ -52,13 +52,13 @@ impl VtClient {
         //! use vt3::VtClient;
         //!
         //! let vt = VtClient::new("Your API Key");
-        //! vt.get_job_by_id(1);
+        //! vt.get_retrohunt_job(1);
         //! ```
         let url = format!("{}/intelligence/retrohunt_jobs/{}", &self.endpoint, job_id);
         http_get(&self.api_key, &self.user_agent, &url)
     }
 
-    pub fn create_job(&self, data: &SubmitJobRoot) -> VtResult<SubmitJobRoot> {
+    pub fn create_retrohunt_job(&self, data: &SubmitJobRoot) -> VtResult<SubmitJobRoot> {
         //! Create/Submit a RetroHunt job
         //!
         //! ## Example Usage
@@ -67,13 +67,13 @@ impl VtClient {
         //!
         //! let vt = VtClient::new("Your API Key");
         //! let mut data = SubmitJobRoot::default();
-        //! vt.create_job(&data);
+        //! vt.create_retrohunt_job(&data);
         //! ```
         let url = format!("{}/intelligence/retrohunt_jobs", &self.endpoint);
         http_body_post(&self.api_key, &self.user_agent, &url, data)
     }
 
-    pub fn delete_job(&self, job_id: i32) -> VtResult<String> {
+    pub fn delete_retrohunt_job(&self, job_id: i32) -> VtResult<String> {
         //! Delete RetroHunt job
         //!
         //! ## Example Usage
@@ -81,13 +81,13 @@ impl VtClient {
         //! use vt3::VtClient;
         //!
         //! let vt = VtClient::new("Your API Key");
-        //! vt.delete_job(1);
+        //! vt.delete_retrohunt_job(1);
         //! ```
         let url = format!("{}/intelligence/retrohunt_jobs/{}", &self.endpoint, job_id);
         http_delete(&self.api_key, &self.user_agent, &url)
     }
 
-    pub fn abort_job(&self, job_id: i32) -> VtResult<String> {
+    pub fn abort_retrohunt_job(&self, job_id: i32) -> VtResult<String> {
         //! Abort a RetroHunt job
         //!
         //! ## Example Usage
@@ -95,7 +95,7 @@ impl VtClient {
         //! use vt3::VtClient;
         //!
         //! let vt = VtClient::new("Your API Key");
-        //! vt.abort_job(1);
+        //! vt.abort_retrohunt_job(1);
         //! ```
         let job_id = job_id.to_string();
         let url = format!(
