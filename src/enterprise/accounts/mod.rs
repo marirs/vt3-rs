@@ -2,7 +2,7 @@ mod response;
 use response::{ApiUsage, GroupRoot, OverallQuotaRoot, UserRoot};
 
 use crate::{
-    utils::{http_delete, http_get},
+    utils::{http_delete, http_get, http_get_with_params},
     VtClient, VtResult,
 };
 
@@ -35,7 +35,12 @@ impl VtClient {
         http_delete(&self.api_key, &self.user_agent, &url)
     }
 
-    pub fn api_usage(&self, id: &str) -> VtResult<ApiUsage> {
+    pub fn api_usage(
+        &self,
+        id: &str,
+        start_date: Option<&str>,
+        end_date: Option<&str>,
+    ) -> VtResult<ApiUsage> {
         //! Retrieve user's API usage.
         //!
         //! ## Example Usage
@@ -43,10 +48,24 @@ impl VtClient {
         //! use vt3::VtClient;
         //!
         //! let vt = VtClient::new("Your API Key");
-        //! vt.api_usage("user_id");
+        //!
+        //! // start_date & end_date fomrat is: YYYYMMDD
+        //! vt.api_usage("user_id", None, None);
         //! ```
         let url = format!("{}/users/{}/api_usage", self.endpoint, id);
-        http_get(&self.api_key, &self.user_agent, &url)
+        let mut query_params: Vec<(&str, &str)> = Vec::new();
+        if let Some(s) = start_date {
+            query_params.push(("start_date", s))
+        }
+        if let Some(e) = end_date {
+            query_params.push(("end_date", e))
+        }
+        http_get_with_params(
+            &self.api_key,
+            &self.user_agent,
+            &url,
+            &query_params.as_slice(),
+        )
     }
 
     pub fn overall_quotas(&self, id: &str) -> VtResult<OverallQuotaRoot> {
