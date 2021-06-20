@@ -35,6 +35,7 @@ pub struct Data {
 pub struct Links {
     #[serde(rename = "self")]
     pub _self: Option<String>,
+    pub related: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -201,4 +202,26 @@ pub struct GroupAttributes {
     pub contact_emails: Option<Vec<String>>,
     #[serde(rename = "quota_usage_by_user")]
     pub quota_usage_by_user: Option<HashMap<String, Value>>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct GroupMembers {
+    pub meta: Option<GroupMeta>,
+    pub data: Option<Vec<GroupMemberData>>,
+    pub links: Option<Links>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct GroupMeta {
+    pub count: Option<i64>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct GroupMemberData {
+    #[serde(rename = "type")]
+    pub _type: Option<String>,
+    pub id: Option<String>,
 }

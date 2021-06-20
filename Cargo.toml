@@ -61,3 +61,13 @@ required-features = ["enterprise"]
 name = "group_info"
 path= "examples/enterprise/group_info.rs"
 required-features = ["enterprise"]
+
+[[example]]
+name = "group_members"
+path= "examples/enterprise/group_members.rs"
+required-features = ["enterprise"]
+
+[[example]]
+name = "group_api_usage"
+path= "examples/enterprise/group_api_usage.rs"
+required-features = ["enterprise"]
