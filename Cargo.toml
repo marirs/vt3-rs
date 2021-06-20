@@ -71,3 +71,13 @@ required-features = ["enterprise"]
 name = "group_api_usage"
 path= "examples/enterprise/group_api_usage.rs"
 required-features = ["enterprise"]
+
+[[example]]
+name = "retrohunt_jobs"
+path= "examples/enterprise/retrohunt_jobs.rs"
+required-features = ["enterprise"]
+
+[[example]]
+name = "livehunt_get_rulesets"
+path= "examples/enterprise/livehunt_get_rulesets.rs"
+required-features = ["enterprise"]
