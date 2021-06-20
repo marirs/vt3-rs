@@ -15,13 +15,13 @@ including those exclusive to VirusTotal Enterprise such as
 - Cargo.toml
 ```toml
 [dependencies]
-vt3 = "0.5.3"
+vt3 = "0.5.4"
 ```
 
 - to enable enterprise features
 ```toml
 [dependencies]
-vt3 = { version = "0.5.3", features = ["enterprise"] }
+vt3 = { version = "0.5.4", features = ["enterprise"] }
 ```
 
 - and then: to get `ip information`
@@ -97,6 +97,8 @@ To run the examples - `Enterprise API Endpoints`:
 - Get Api usage info: `cargo run --example api_usage --features="enterprise" <your_api_key> <user_id>`
 - Get overall quotas for user: `cargo run --example overall_quotas --features="enterprise" <your_api_key> <user_id>`
 - Get group information: `cargo run --example group_info --features="enterprise" <your_api_key> <user_id>`
+- Get api usage: `cargo run --example group_api_usage --features="enterprise" <your_api_key> <user_id>`
+- Get group members: `cargo run --example group_members --features="enterprise" <your_api_key> <user_id>`
 
 ## VT Developer reference
 
