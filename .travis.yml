@@ -1,14 +1,11 @@
 language: rust
-sudo: false
-cache: cargo
+os:
+  - linux
+dist: bionic
 rust:
   - stable
-  - beta
-  - nightly
-matrix:
-  allow_failures:
-    - rust: beta
-    - rust: nightly
+jobs:
+  fast_finish: true
 script:
-  - cargo build
-  - cargo test --features "all"
+  - cargo build --verbose --features=all
+  - cargo test --verbose --features=all
