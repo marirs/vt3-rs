@@ -11,7 +11,7 @@
 /// let vt_client = vt3::VtClient::new("YOUR API KEY");
 /// ```
 ///
-mod public_api;
+pub mod public_api;
 
 #[cfg(feature = "enterprise")]
 mod enterprise;

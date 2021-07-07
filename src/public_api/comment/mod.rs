@@ -1,5 +1,7 @@
 mod response;
-use response::{CommentRoot, CommentsRoot};
+pub use response::{CommentRoot, CommentsRoot, Attributes};
+mod model;
+pub use model::{Comment, Comments, CommentAttributes, CommentVotes};
 
 use crate::{
     utils::{http_delete, http_get, http_get_with_params},

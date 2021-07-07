@@ -2,7 +2,9 @@ use reqwest::blocking::{multipart::Form, multipart::Part};
 use std::{fs::File, io::Read};
 
 mod response;
-use response::{Root, ScanRoot};
+use response::{Attributes, Root, ScanRoot};
+mod model;
+pub use model::{VtFile, VtFiles};
 
 use crate::{
     utils::{http_get, http_multipart_post, http_post},

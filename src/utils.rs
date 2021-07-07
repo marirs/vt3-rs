@@ -8,7 +8,6 @@ use serde::de::DeserializeOwned;
 #[cfg(feature = "feeds")]
 use std::io::{BufRead, BufReader};
 
-#[cfg(feature = "hunting")]
 use serde::Serialize;
 
 /// Process a regular reqwest response
@@ -135,7 +134,6 @@ where
 }
 
 /// POST to a URL with data in the body
-#[cfg(feature = "hunting")]
 pub(crate) fn http_body_post<S, T>(
     api_key: &str,
     user_agent: &str,
