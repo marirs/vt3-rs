@@ -4,6 +4,7 @@ use std::{fs::File, io::Read};
 mod response;
 use response::{Attributes, Root, ScanRoot};
 mod model;
+
 pub use model::{VtFile, VtFiles};
 
 use crate::{

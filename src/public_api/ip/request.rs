@@ -1,9 +1,8 @@
 use crate::public_api::{
-	comment::{CommentAttributes, CommentVotes},
+	comment::CommentAttributes,
 	model::Object,
 	votes::VoteAttributes,
 };
-use serde::Serialize;
 
 type CreateCommentReq = Object<CommentAttributes>;
 

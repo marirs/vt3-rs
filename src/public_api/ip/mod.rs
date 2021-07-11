@@ -1,10 +1,13 @@
 mod model;
 mod request;
 mod response;
+
 use super::comment::{Comment, Comments};
-pub use super::comment::{CommentAttributes, CommentVotes};
+pub use super::comment::CommentAttributes;
+
 use super::file::VtFiles;
 use super::relationships::RelatedCollections;
+
 pub use super::votes::VoteAttributes;
 use super::votes::{Vote, Votes};
 pub use model::{RelatedObjects, Relationships};
@@ -55,7 +58,7 @@ impl VtClient {
         //! ## Example Usage
         //! ```rust
         //! use vt3::VtClient;
-        //! use vt3::public_api::ip::request::{CommentAttributes, CommentVotes};
+        //! use vt3::public_api::ip::CommentAttributes;
         //!
         //! let vt = VtClient::new("API Key");
         //! let attrs = CommentAttributes::new(
