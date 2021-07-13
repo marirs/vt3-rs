@@ -11,6 +11,11 @@ including those exclusive to VirusTotal Enterprise. See below for list of availa
 - Public API
   - IP
     - Get IP information
+    - Get Comments
+    - Add Comments
+    - List Votes
+    - Add Votes
+    - List Ip related IDs/Objects
   - Domain
     - Get Domain information
   - File
@@ -47,7 +52,9 @@ including those exclusive to VirusTotal Enterprise. See below for list of availa
 - Feeds (Enterprise) - `features = ["feeds"]`
   - File feeds
     - Get file feed batch
+    - Get file behaviours feed batch  
     - Get file feed batch hourly
+    - Get file behaviours feed batch hourly
   - Url feeds
     - Get Url feed batch
     - Get Url feed batch hourly
