@@ -44,7 +44,7 @@ impl VtClient {
             f.read_to_end(&mut buffer)?;
         }
         let form_data = Form::new().part(
-            "public_api.file",
+            "file",
             Part::bytes(buffer).file_name(file.to_owned()),
         );
         let url = format!("{}/files", &self.endpoint);
