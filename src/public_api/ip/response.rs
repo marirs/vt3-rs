@@ -35,6 +35,8 @@ pub struct Attributes {
     pub last_https_certificate_date: Option<i64>,
     #[serde(rename = "last_modification_date")]
     pub last_modification_date: Option<i64>,
+    #[serde(rename = "last_analysis_date")]
+    pub last_analysis_date: Option<i64>,
     pub network: Option<String>,
     #[serde(rename = "regional_internet_registry")]
     pub regional_internet_registry: Option<String>,
