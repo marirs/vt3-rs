@@ -68,13 +68,13 @@ including those exclusive to VirusTotal Enterprise. See below for list of availa
 - Cargo.toml
 ```toml
 [dependencies]
-vt3 = "0.7.2"
+vt3 = "0.7.3"
 ```
 
 - to enable enterprise features
 ```toml
 [dependencies]
-vt3 = { version = "0.7.2", features = ["enterprise"] }
+vt3 = { version = "0.7.3", features = ["enterprise"] }
 ```
 
 - and then: to get `ip information`
