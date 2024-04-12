@@ -1,4 +1,4 @@
-pub use super::response::{Attributes as CommentAttributes, Votes as CommentVotes};
+pub use super::response::Attributes as CommentAttributes;
 use crate::public_api::model::{Collection, Object};
 
 pub type Comment = Object<CommentAttributes>;

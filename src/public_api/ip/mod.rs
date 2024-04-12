@@ -2,8 +2,8 @@ mod model;
 mod request;
 mod response;
 
-use super::comment::{Comment, Comments};
 pub use super::comment::CommentAttributes;
+use super::comment::{Comment, Comments};
 
 use super::file::VtFiles;
 use super::relationships::RelatedCollections;

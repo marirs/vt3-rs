@@ -15,6 +15,6 @@ fn main() {
         .get_comment(comment_id);
     match res {
         Ok(report) => println!("{:#?}", report),
-        Err(e) => println!("Error: {}", e.to_string()),
+        Err(e) => println!("Error: {}", e),
     }
 }

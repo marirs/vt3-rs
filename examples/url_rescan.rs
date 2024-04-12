@@ -14,7 +14,7 @@ fn main() {
     let resource_id = match vt_client.url_scan(url) {
         Ok(report) => report,
         Err(e) => {
-            println!("Error: {}", e.to_string());
+            println!("Error: {}", e);
             std::process::exit(1)
         }
     };
@@ -24,7 +24,7 @@ fn main() {
     } else {
         match vt_client.url_rescan(&resource_id.data.id) {
             Ok(report) => println!("{:#?}", report),
-            Err(e) => println!("Error: {}", e.to_string()),
+            Err(e) => println!("Error: {}", e),
         }
     }
 }

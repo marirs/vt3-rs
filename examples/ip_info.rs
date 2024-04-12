@@ -18,7 +18,7 @@ fn main() {
         .ip_info(ip_address);
     match res {
         Ok(report) => println!("{:#?}", report),
-        Err(e) => println!("Error: {}", e.to_string()),
+        Err(e) => println!("Error: {}", e),
     }
 
     let client = VtClient::new(&api_key).user_agent("Chrome_For_Windows");

@@ -1,7 +1,7 @@
 mod response;
-pub use response::{CommentRoot, CommentsRoot, Attributes};
+pub use response::{CommentRoot, CommentsRoot};
 mod model;
-pub use model::{Comment, Comments, CommentAttributes, CommentVotes};
+pub use model::{Comment, CommentAttributes, Comments};
 
 use crate::{
     utils::{http_delete, http_get, http_get_with_params},
@@ -40,7 +40,7 @@ impl VtClient {
             &self.api_key,
             &self.user_agent,
             &url,
-            &query_params.as_slice(),
+            query_params.as_slice(),
         )
     }
 

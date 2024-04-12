@@ -5,7 +5,7 @@ mod response;
 use response::{Attributes, Root, ScanRoot};
 mod model;
 
-pub use model::{VtFile, VtFiles};
+pub use model::VtFiles;
 
 use crate::{
     utils::{http_get, http_multipart_post, http_post},
@@ -43,10 +43,7 @@ impl VtClient {
         {
             f.read_to_end(&mut buffer)?;
         }
-        let form_data = Form::new().part(
-            "file",
-            Part::bytes(buffer).file_name(file.to_owned()),
-        );
+        let form_data = Form::new().part("file", Part::bytes(buffer).file_name(file.to_owned()));
         let url = format!("{}/files", &self.endpoint);
         http_multipart_post(&self.api_key, &self.user_agent, &url, form_data)
     }

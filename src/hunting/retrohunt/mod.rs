@@ -3,7 +3,7 @@ use response::SearchJobRoot;
 pub use response::SubmitRetrohuntJob;
 
 use crate::{
-    utils::{http_post, http_body_post, http_delete, http_get, http_get_with_params},
+    utils::{http_body_post, http_delete, http_get, http_get_with_params, http_post},
     VtClient, VtResult,
 };
 

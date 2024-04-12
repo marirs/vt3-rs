@@ -13,6 +13,6 @@ fn main() {
     let res = VtClient::new(&api_key).file_rescan(file);
     match res {
         Ok(report) => println!("{:#?}", report),
-        Err(e) => println!("Error: {}", e.to_string()),
+        Err(e) => println!("Error: {}", e),
     }
 }

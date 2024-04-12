@@ -5,6 +5,7 @@ use crate::{
     utils::{http_get, http_post},
     VtClient, VtResult,
 };
+use base64::{engine::general_purpose::STANDARD, Engine as _};
 
 impl VtClient {
     pub fn url_scan(&self, resource_url: &str) -> VtResult<ScanRoot> {
@@ -56,7 +57,7 @@ impl VtClient {
         let url = format!(
             "{}/urls/{}",
             &self.endpoint,
-            base64::encode(resource_url).replace('=', "")
+            STANDARD.encode(resource_url).replace('=', "")
         );
         http_get(&self.api_key, &self.user_agent, &url)
     }

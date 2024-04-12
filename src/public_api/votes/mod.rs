@@ -1,2 +1,2 @@
 mod model;
-pub use model::{Vote, Votes, VoteAttributes};
+pub use model::{Vote, VoteAttributes, Votes};
